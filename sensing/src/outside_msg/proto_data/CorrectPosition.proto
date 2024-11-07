@@ -1,0 +1,28 @@
+syntax = "proto3";
+package CorrectPosition;
+option optimize_for = LITE_RUNTIME;
+
+message WGS84
+{
+	double longitude = 1;
+	double latitude = 2;
+	double altitude = 3;
+	float  heading = 4;
+};
+
+message DatumPosition
+{
+	uint64 m_datumTimestamp = 1;
+	WGS84  m_datumposition = 2;
+	bool   m_datumcorrect = 3;
+};
+
+message CorrectPosition
+{
+	uint64   m_Timestamp = 1;
+	uint64   m_datumTimestamp = 2;
+	DatumPosition m_datumPosition = 3;
+	WGS84    m_VehiclePosition = 4;
+	WGS84    m_CorrectPosition = 5;
+	WGS84    m_SpeedPosition = 6;
+};

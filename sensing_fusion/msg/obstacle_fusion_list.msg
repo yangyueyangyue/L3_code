@@ -1,0 +1,9 @@
+Header header
+int32 sequence
+int64 timestamp
+int32 obstacle_num
+obstacle_fusion_info[] obstacles
+
+obstacle_fusion_info target_obstacle
+
+obstacle_fusion_info target_obstacle_1

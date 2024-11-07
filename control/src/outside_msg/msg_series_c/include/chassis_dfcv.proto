@@ -1,0 +1,36 @@
+syntax = "proto2";
+
+package phoenix.msg.control;
+
+message ChassisDFCV {
+  //制动设备源地址
+  optional uint32  source_address_brake_control_device = 1;
+  //整车总质量（含挂车）
+  optional double  vehicle_mass = 2;
+  //左前轮制动压力
+  optional double brake_pressure_lf = 3;
+  //当前档位传动比
+  optional double current_gear_ratio = 4;
+  //变速箱选择的档位
+  optional int32 transmission_selected_gear = 5;
+  //离合器状态
+  optional uint32 clutch_switch = 6;
+  //发动机名义摩擦扭矩百分比
+  optional int32 nominal_fricton_troque_percent = 7;
+  //附件损失扭矩百分比
+  optional int32 estimated_lossed_torque_percent = 8;
+  //f发动机实际扭矩百分比
+  optional int32 actual_engine_torque_percent = 9;
+  //驾驶员请求的扭矩百分比
+  optional int32 driver_damand_torque_percent = 10;
+  //发动机设备控制源地址.
+  optional uint32 source_address_engine_control_device = 11;
+  //变速箱换档状态
+  optional uint32 transmission_shift_status = 12;
+  //变速箱结合状态
+  optional uint32 transmission_engage_status = 13;
+  //变速箱TSC1扭矩控制模式
+  optional uint32 tcu_engine_control_mode = 14;
+  //挂车状态
+  optional uint32 trailer_connected_status = 15;
+}

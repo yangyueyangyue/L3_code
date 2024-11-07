@@ -1,0 +1,93 @@
+syntax = "proto3";
+package phoenix.ad_data_upload;
+option optimize_for = LITE_RUNTIME;
+message SYS_CRUISING_SPEED_t_message
+{
+	    	bool	valid = 1;
+				uint32	cruisingspeed = 2;
+				uint32	leftrange = 3;
+				uint32	rightrange = 4;
+};
+message SYS_SPEED_LIMIT_t_message
+{
+	    	bool	valid = 1;
+				uint32	speedlimit = 2;
+				uint32	leftrange = 3;
+				uint32	rightrange = 4;
+};
+message SYS_CAR_DISTANCE_t_message
+{
+	    	bool	valid = 1;
+				uint32	distancelimit = 2;
+				uint32	leftrange = 3;
+				uint32	rightrange = 4;
+};
+message SYS_PARAM_SET_t_message
+{
+				SYS_CRUISING_SPEED_t_message	sys_cruising_speed = 1;
+				SYS_SPEED_LIMIT_t_message	sys_speed_limit = 2;
+				SYS_CAR_DISTANCE_t_message	sys_car_distance = 3;
+};
+message SYS_CONTROL_INFO_t_message
+{
+				uint32	ADMode = 1;
+				uint32	ADModeOfSteering = 2;
+				uint32	ADModeOfBCM = 3;
+				uint32	ADModeOfVECU = 4;
+				uint32	ADModeOfSCU = 5;
+				SYS_PARAM_SET_t_message	Sys_Comm_Info = 6;
+				uint32	turnlight_left = 7;
+				uint32	turnlight_right = 8;
+};
+message SYS_CHASSIS_t_message
+{
+				uint32	drivingmode = 1;
+				float	steeringwheelangle = 2;
+				float	brakepedalvalue = 3;
+				float	accpedalvalue = 4;
+				float	velocity = 5;
+				float	acceleration = 6;
+};
+message SYS_ECUComm_Info_t_message
+{
+				uint32	SysPowerStatus = 1;
+				uint32	SysInitSyncFlag = 2;
+				uint32	Confirm = 3;
+};
+message TC397_Sys_Tasktime_message
+{
+				uint32	u64AplBehaviorPlanTask100ms_period = 1;
+				uint32	u64AplCommMgrTask10ms_period = 2;
+				uint32	u64AplLateralCtrlTask10ms_period = 3;
+				uint32	u64AplMotionPlanTask100ms_period = 4;
+				uint32	u64AplSafetyCtrlTask50ms_period = 5;
+				uint32	u64AplSystemMgrTask50ms_period = 6;
+				uint32	u64AplVerticalCtrlTask10ms_period = 7;
+				uint32	u64AplBehaviorPlanTask100ms_time_diff = 8;
+				uint32	u64AplCommMgrTask10ms_time_diff = 9;
+				uint32	u64AplLateralCtrlTask10ms_time_diff = 10;
+				uint32	u64AplMotionPlanTask100ms_time_diff = 11;
+				uint32	u64AplSafetyCtrlTask50ms_time_diff = 12;
+				uint32	u64AplSystemMgrTask50ms_time_diff = 13;
+				uint32	u64AplVerticalCtrlTask10ms_time_diff = 14;
+};
+message st_Display_Debug__message
+{
+				repeated uint32	u64Reserve1 = 1;
+				repeated uint32	u32Reserve2 = 2;
+				repeated uint32	u16Reserve3 = 3;
+				repeated uint32	u8Reserve4 = 4;
+				repeated sint32	int32Reserve5 = 5;
+				repeated sint32	int16Reserve6 = 6;
+				repeated sint32	int8Reserve7 = 7;
+				repeated double	f64Reserve8 = 8;
+				repeated float	f32Reserve9 = 9;
+};
+message System_Display_Data_message
+{
+				SYS_CONTROL_INFO_t_message	sys_control_info = 1;
+				SYS_CHASSIS_t_message	sys_chassis = 2;
+				SYS_ECUComm_Info_t_message	sys_ecu_com_info = 3;
+				TC397_Sys_Tasktime_message	sys_task_time = 4;
+				st_Display_Debug__message	display_debug = 5;
+};

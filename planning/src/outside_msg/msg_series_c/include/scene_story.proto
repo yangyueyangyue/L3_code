@@ -1,0 +1,179 @@
+syntax = "proto2";
+
+package phoenix.msg.routing;
+
+import "chassis.proto";
+
+
+// 场景任务的控制线
+message SceneStoryControlLine {
+  // 二维点
+  message Point {
+    optional double x = 1 [default = 0.0];
+    optional double y = 2 [default = 0.0];
+  }
+
+  // 控制线起点
+  optional Point start_point = 1;
+  // 控制线终点
+  optional Point end_point = 2;
+}
+
+// 场景任务的区域
+message SceneStoryArea {
+  // 区域(类型1)
+  message AreaType_01 {
+    // 离区域的距离
+    optional double distance = 1 [default = 0.0];
+  }
+
+  // 区域(类型2)
+  message AreaType_02 {
+    // 控制线
+    optional SceneStoryControlLine control_line = 1;
+    // 距离控制线的距离(Start)
+    optional double start_s = 2 [default = 0.0];
+    // 距离控制线的距离(End)
+    optional double end_s = 3 [default = 0.0];
+  }
+
+  // 区域(类型1)
+  optional AreaType_01 area_type_01 = 2;
+  // 区域(类型2)
+  optional AreaType_02 area_type_02 = 3;
+}
+
+// 执行场景任务的条件(满足条件方可执行)
+message SceneStoryCondition {
+  // 区域条件是否有效
+  optional bool valid_area = 1 [default = false];
+  // 速度上限
+  optional double speed_high = 2 [default = 0.0];
+  // 速度下限条件是否有效
+  optional double speed_low = 3 [default = 0.0];
+  // 档位条件
+  optional control.Chassis.GearPosition gear = 4 [default = GEAR_INVALID];
+}
+
+// 需要执行的场景任务
+message SceneStoryAction {
+  // 维持时间 (s)
+  optional double hold_time = 4 [default = 0];
+  
+  // 目标车速
+  optional double speed = 2 [default = 0.0];
+  // 建议加速度/减速度
+  optional double acceleration = 3 [default = 0.0];
+  
+  // 目标档位
+  optional control.Chassis.GearPosition gear = 1 [default = GEAR_INVALID];
+  // 转向灯
+  optional control.Chassis.SignalTurnLamp turn_lamp = 5 [default = TURN_LAMP_INVALID];
+  // 制动灯
+  optional control.Chassis.SignalLamp brake_lamp = 6 [default = LAMP_INVALID];
+}
+
+//减速带
+message CloseToSpeedBumps {
+  optional string id = 1;
+  optional SceneStoryArea area = 2;
+  optional SceneStoryCondition condition = 3;
+  optional SceneStoryAction action = 4;
+}
+
+//停车区域
+message CloseToParkingSpaces {
+  optional string id = 1;
+  optional SceneStoryArea area = 2;
+  optional SceneStoryCondition condition = 3;
+  optional SceneStoryAction action = 4;
+}
+
+//人行横道
+message CloseToCrosswalk {
+  optional string id = 1;
+  optional SceneStoryArea area = 2;
+  optional SceneStoryCondition condition = 3;
+  optional SceneStoryAction action = 4;
+}
+
+//禁止停车区域
+message CloseToClearArea {
+  optional string id = 1;
+  optional SceneStoryArea area = 2;
+  optional SceneStoryCondition condition = 3;
+  optional SceneStoryAction action = 4;
+}
+
+//交叉路口
+message CloseToJunction {
+  optional string id = 1;
+  optional SceneStoryArea area = 2;
+  optional SceneStoryCondition condition = 3;
+  optional SceneStoryAction action = 4;
+}
+
+//信号灯
+message CloseToSignal {
+  optional string id = 1;
+  optional SceneStoryArea area = 2;
+  optional SceneStoryCondition condition = 3;
+  optional SceneStoryAction action = 4;
+}
+
+//停止信号
+message CloseToStopSign {
+  optional string id = 1;
+  optional SceneStoryArea area = 2;
+  optional SceneStoryCondition condition = 3;
+  optional SceneStoryAction action = 4;
+}
+
+//让车标志
+message CloseToYieldSign {
+  optional string id = 1;
+  optional SceneStoryArea area = 2;
+  optional SceneStoryCondition condition = 3;
+  optional SceneStoryAction action = 4;
+}
+
+// 弯道
+message CloseToCurveRoad {
+  optional string id = 1;
+  optional SceneStoryArea area = 2;
+  optional SceneStoryCondition condition = 3;
+  optional SceneStoryAction action = 4;
+  optional double curvatrue = 5 [default = 0.0];
+}
+
+// 终点
+message CloseToDestination {
+  optional string id = 1;
+  optional SceneStoryArea area = 2;
+  optional SceneStoryCondition condition = 3;
+  optional SceneStoryAction action = 4;
+}
+
+message SceneStories {
+  // 弯道
+  repeated CloseToCurveRoad close_to_curve_road = 1;
+  // 终点
+  repeated CloseToDestination  close_to_destination = 2;
+  // 人行横道
+  repeated CloseToCrosswalk close_to_crosswalk = 3;
+  // 减速带
+  repeated CloseToSpeedBumps close_to_speed_bumps = 4;
+  // 停车区域   
+  repeated CloseToParkingSpaces close_to_parking_spaces = 5; 
+  // 禁止停车区域  
+  repeated CloseToClearArea close_to_clear_area = 6; 
+  // 交叉路口
+  repeated CloseToJunction close_to_junction = 7; 
+  // 信号灯
+  repeated CloseToSignal close_to_signal = 8; 
+  // 停止信号
+  repeated CloseToStopSign close_to_stop_sign = 9; 
+  // 让车标志
+  repeated CloseToYieldSign close_to_yield_sign = 10;
+}
+

@@ -1,0 +1,8 @@
+﻿#ifndef MAP_CONTROL_H
+#define MAP_CONTROL_H
+
+#define MAP_HARDWARE_PLATFORM_AD_ECU_BUILD 0
+#define MAP_PROCESS_DATA 1
+#define MAP_PROCESS_DEVELOP 1
+
+#endif

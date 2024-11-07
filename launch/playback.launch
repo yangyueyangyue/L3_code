@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- start sensing_fusion -->
+  <node pkg="sensing_fusion" name="sensing_fusion" type="sensing_fusion" output="screen"/>
+
+  <!-- start planning -->
+  <node pkg="planning" name="planning" type="planning" output="screen"/>
+</launch>

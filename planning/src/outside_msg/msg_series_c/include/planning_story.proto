@@ -1,0 +1,56 @@
+syntax = "proto2";
+
+package phoenix.msg.planning;
+
+import "header.proto";
+import "chassis.proto";
+
+
+message PlanningStoryRefLine {
+  message Point {
+    optional double x = 1 [default = 0.0];
+    optional double y = 2 [default = 0.0];
+  }
+
+  repeated Point points = 1;
+}
+
+message PlanningStoryCondition {
+  message Area {
+    optional double left_width = 1 [default = 2.0];
+    optional double right_width = 2 [default = 2.0];
+    optional double start_s = 3 [default = -1.0];
+    optional double end_s = 4 [default = -1.0];
+  }
+  optional Area area = 1;
+  optional double speed_high = 2 [default = 0.0];
+  optional double speed_low = 3 [default = 0.0];
+  optional control.Chassis.GearPosition gear = 4 [default = GEAR_INVALID];
+}
+
+message PlanningStoryAction {
+  optional double holding_time = 1 [default = 0.0];
+  optional double speed = 2 [default = 0.0];
+  optional double acceleration = 3 [default = 0.0];
+  optional control.Chassis.GearPosition gear = 4 [default = GEAR_INVALID];
+  optional control.Chassis.SignalTurnLamp turn_lamp = 5 [default = TURN_LAMP_INVALID];
+  optional control.Chassis.SignalLamp brake_lamp = 6 [default = LAMP_INVALID];
+  optional uint32 cmd = 7 [default = 0];
+}
+
+message PlanningStory {
+  optional int32 id = 1 [default = 0];
+  optional int32 type = 2 [default = 0];
+  optional PlanningStoryRefLine ref_line = 3;
+  optional PlanningStoryCondition condition = 4;
+  optional PlanningStoryAction action = 5;
+}
+
+message PlanningStoryList {
+  // Header
+  optional common.Header header = 1;
+
+  repeated PlanningStory storys = 2;
+}
+
+

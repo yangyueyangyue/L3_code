@@ -1,0 +1,41 @@
+syntax = "proto2";
+
+package phoenix.msg.control;
+
+import "header.proto";
+import "chassis_ft_auman.proto";
+
+
+message SpecialChassisInfo {
+  // Header
+  optional common.Header header = 1;
+
+  // 开始自动驾驶命令, 0 ~ 无效值, 1 ~ 退出自动驾驶, 2 ~ 进入自动驾驶
+  optional int32 start_adas = 2 [default = 0];
+
+  // CAN线连接状态：0 ~ 正常, 1 ~ 丢帧
+  optional int32 cnt_stu_frame_loss_can0 = 3 [default = 0];
+  optional int32 cnt_stu_frame_loss_can1 = 4 [default = 0];
+  optional int32 cnt_stu_frame_loss_can2 = 5 [default = 0];
+  optional int32 cnt_stu_frame_loss_can3 = 6 [default = 0];
+
+  // 网关和车身的CAN线连接状态：0 ~ 未连接, 1 ~ 已连接
+  optional int32 cnt_stu_gtw_to_veh_can0 = 7 [default = 0];
+  optional int32 cnt_stu_gtw_to_veh_can1 = 8 [default = 0];
+  optional int32 cnt_stu_gtw_to_veh_can2 = 9 [default = 0];
+  optional int32 cnt_stu_gtw_to_veh_can3 = 10 [default = 0];
+
+  // 控制侧和网关的CAN线连接状态：0 ~ 未连接, 1 ~ 已连接
+  optional int32 cnt_stu_ctl_to_gtw_can0 = 11 [default = 0];
+  optional int32 cnt_stu_ctl_to_gtw_can1 = 12 [default = 0];
+  optional int32 cnt_stu_ctl_to_gtw_can2 = 13 [default = 0];
+  optional int32 cnt_stu_ctl_to_gtw_can3 = 14 [default = 0];
+
+  // 网关和控制侧的连接状态: 0 ~ 未连接, 1 ~ 已连接
+  optional int32 cnt_stu_ctl_to_gtw = 15 [default = 0];
+
+  // 具体车型的特殊信息 (FT-Auman)
+  optional ChassisFtAuman ft_auman = 16;
+}
+
+

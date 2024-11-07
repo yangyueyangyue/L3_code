@@ -1,0 +1,76 @@
+syntax = "proto3";
+package MpuState;
+option optimize_for = LITE_RUNTIME;
+
+enum EMPUState 
+{
+    MPUERR = 0; // 失败
+    MPUOK = 1;  // 成功
+};
+
+enum PlanningType 
+{
+    PlanningTypeOut = 0; // 是否在规划路径上: 0 不在
+    PlanningTypeIn = 1;      // 是否在规划路径上: 1 在
+};
+
+enum HighWayType 
+{
+    HighWayTypeOut = 0; // 是否在规划路径上: 0 不在
+    HighWayTypeIn = 1;      // 是否在规划路径上: 1 在
+    HighWayTypeDefault = 2;      // 是否在规划路径上: 2 默认值
+};
+
+enum GeofenceType 
+{
+    GeofenceTypeRamp150 = 0;   // 即将进入匝道前150m     Reason:LaneConnectRamp offset < 150m
+    GeofenceTypeInRamp = 1;        // 完全进入匝道           Reason:Ramp
+    GeofenceTypeTunnel200 = 2;     // 即将进入隧道前200m     Reason:
+    GeofenceTypeInTunnel = 3;      // 隧道中                Reason:Tunnel
+    GeofenceTypeOutTunnel = 4;     // 出隧道                 Reason:
+    GeofenceTypeExceCurvature = 5; // 曲率过大（弯道半径<250m）Reason:CurvatureOverrun
+    GeofenceTypeDefault = 0xF; // 默认值
+};
+
+message MonitorState 
+{
+    bool AntennaConnectStatus    = 1 ;   
+    bool MpuMCURunStatus         = 2 ;    
+    bool MpuSOCRunStatus         = 3 ;    
+    bool F9KDemarcateStatus      = 4 ;     
+    bool MpuEngineRunStatus      = 5 ;     
+    bool IsHasMapData            = 6 ;    
+    bool VehicleCANData          = 7 ;    
+    bool FrontCameraLineStatus   = 8 ;      
+};
+
+message MonitorSignal
+{
+    bool F9KGnssWeakenStatus      = 1 ;
+    bool F9kRTKStatus             = 2 ;
+    bool F9kImuInitStatus         = 3 ;
+    bool FrontCameraConfidence    = 4 ;
+    bool FusiionConfidenceStatus  = 5 ;
+};
+
+message MonitorTraj
+{
+    PlanningType planningState = 1;
+    GeofenceType geofenceState = 2;
+};
+
+message MonitorMpuState
+{
+    uint64 TimeStamp = 1;
+    EMPUState State = 2;     // MPU状态(0,不OK  1,OK)
+    EMPUState Single = 3;    // MPU信号(0,不OK  1,OK)
+    EMPUState Traj = 4;      // Mpu Traj State(0,不OK  1,OK)
+    uint32 FussValue = 5;    // 融合置信度(0 -100)
+    MonitorTraj TrajValue = 6;   //
+    MonitorState StateValue = 7;
+    MonitorSignal SinglValue = 8;
+    HighWayType HighWay = 9;
+    uint32 LimitSpeedMax = 10;  //当前位置当前车道的最大限速
+    uint32 LimitSpeedMin = 11;  //当前位置当前车道的最小限速
+};
+

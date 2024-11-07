@@ -1,0 +1,146 @@
+syntax = "proto2";
+
+package phoenix.msg.routing;
+
+import "chassis.proto";
+
+message Point {
+  optional double x = 1 [default = 0.0];
+  optional double y = 2 [default = 0.0];
+}
+
+message ControlLine {
+  optional Point start_point = 1;
+  optional Point end_point = 2;
+}
+
+message Condition {
+  optional double start_s = 1 [default = 0.0];
+  optional double end_s = 2 [default = 0.0];
+  optional double speed_high = 3 [default = 0.0];
+  optional double speed_low = 4 [default = 0.0];
+}
+
+message Action {
+  optional control.Chassis.GearPosition gear = 1;
+  optional double speed = 2 [default = 0.0];
+  optional double acceleration = 3 [default = 0.0];
+  optional double run_time = 4 [default = 0.0];
+  optional control.Chassis.SignalTurnLamp turn_lamp = 5;
+  optional control.Chassis.SignalLamp brake_lamp = 6;
+}
+
+//减速带
+message CloseToSpeedBumps {
+  optional int32 id = 1;
+  optional double distance = 2 [default = 0.0];
+  optional ControlLine control_line = 3;
+  optional Condition condition = 4;
+  optional Action action = 5;
+}
+
+//停车区域
+message CloseToParkingSpaces {
+  optional int32 id = 1;
+  optional double distance = 2 [default = 0.0];
+  optional ControlLine control_line = 3;
+  optional Condition condition = 4;
+  optional Action action = 5;
+}
+
+//人行横道
+message CloseToCrosswalk {
+  optional int32 id = 1;
+  optional double distance = 2 [default = 0.0];
+  optional ControlLine control_line = 3;
+  optional Condition condition = 4;
+  optional Action action = 5;
+}
+
+//禁止停车区域
+message CloseToClearArea {
+  optional int32 id = 1;
+  optional double distance = 2 [default = 0.0];
+  optional ControlLine control_line = 3;
+  optional Condition condition = 4;
+  optional Action action = 5;
+}
+
+//交叉路口
+message CloseToJunction {
+  optional string id = 1;
+  optional double distance = 2 [default = 0.0];
+  optional ControlLine control_line = 3;
+  optional Condition condition = 4;
+  optional Action action = 5;
+}
+
+//信号灯
+message CloseToSignal {
+  optional int32 id = 1;
+  optional double distance = 2 [default = 0.0];
+  optional ControlLine control_line = 3;
+  optional Condition condition = 4;
+  optional Action action = 5;
+}
+
+//停止信号
+message CloseToStopSign {
+  optional int32 id = 1;
+  optional double distance = 2 [default = 0.0];
+  optional ControlLine control_line = 3;
+  optional Condition condition = 4;
+  optional Action action = 5;
+}
+
+//让车标志
+message CloseToYieldSign {
+  optional int32 id = 1;
+  optional double distance = 2 [default = 0.0];
+  optional ControlLine control_line = 3;
+  optional Condition condition = 4;
+  optional Action action = 5;
+}
+
+// 弯道
+message CloseToCurveRoad {
+  optional int32 id = 1;
+  optional double distance = 2 [default = 0.0];
+  optional double max_curve = 3 [default = 0.0];
+  optional ControlLine control_line = 4;
+  optional Condition condition = 5;
+  optional Action action = 6;
+}
+
+// 终点
+message CloseToDestination {
+  optional int32 id = 1;
+  optional double distance = 2 [default = 0.0];
+  optional ControlLine control_line = 3;
+  optional Condition condition = 4;
+  optional Action action = 5;
+}
+
+message Scene_Stories {
+  // 弯道
+  repeated CloseToCurveRoad close_to_curve_road = 1;
+  // 终点
+  repeated CloseToDestination  close_to_destination = 2;
+  // 人行横道
+  repeated CloseToCrosswalk close_to_crosswalk = 3;
+  // 减速带
+  repeated CloseToSpeedBumps close_to_speed_bumps = 4;
+  // 停车区域   
+  repeated CloseToParkingSpaces close_to_parking_spaces = 5; 
+  // 禁止停车区域  
+  repeated CloseToClearArea close_to_clear_area = 6; 
+  // 交叉路口
+  repeated CloseToJunction close_to_junction = 7; 
+  // 信号灯
+  repeated CloseToSignal close_to_signal = 8; 
+  // 停止信号
+  repeated CloseToStopSign close_to_stop_sign = 9; 
+  // 让车标志
+  repeated CloseToYieldSign close_to_yield_sign = 10;
+}
+

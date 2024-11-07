@@ -1,0 +1,27 @@
+float64 SpdPln_lTrgLngErr_mp
+float64 SpdPln_vTrgSpd_mp
+float64 SpdPln_aTrgAcc_mp
+uint8   BhvCrdn_numBhvID_mp
+float64 VehDa_rSlop_mp
+float64 DRMC_lCurr
+float64 EnvDetn_lCllsnTarLgt
+float64 EnvDetn_vCllsnTarRel
+uint8   EnvDetn_idCllsnTar
+
+
+int8    PlanningTraj_IsValid
+float64 LATC_LineCv0
+float64 LATC_LineCv1
+float64 LATC_LineCv2
+float64 LATC_LineCv3
+float64 LATC_LineCv4
+float64 LATC_LineCv5
+float64 LATC_lLgtDist2LineZero
+int8    LaneTraj_IsValid
+float64 LATC_cTgtPathCv0
+float64 LATC_cTgtPathCv1
+float64 LATC_cTgtPathCv2
+float64 LATC_cTgtPathCv3
+float64 LATC_cTgtPathCv4
+float64 LATC_cTgtPathCv5
+float64 VMP_lLgtDist2PathZero

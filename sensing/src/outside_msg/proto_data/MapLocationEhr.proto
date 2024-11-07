@@ -1,0 +1,136 @@
+syntax = "proto3";
+package MapLocationEhr;
+option optimize_for = LITE_RUNTIME;
+
+message Coordinate{
+	double m_x = 1;
+	double m_y = 2;
+	double m_z = 3;
+};
+
+message Point{
+	double m_x = 1;
+	double m_y = 2;
+	double m_z = 3;
+};
+
+message DatumPoint
+{
+	uint64 m_datumTimestamp = 1;
+	Coordinate m_point = 2;
+};
+
+message VehicleState{
+	uint64 m_timestamp = 1;
+	uint64 m_datumTimestamp = 2;
+	uint64 m_lastTimestamp = 3;
+	Coordinate m_point = 4;
+	Coordinate m_relativeVehicle = 5;
+	uint32 m_confidence = 6;
+	message MatchInfo{
+		uint64    m_key           = 1;        ///< 车道的键
+    		uint32     m_laneIndex     = 2;        ///< @brief     车道的序号
+                                                        ///< @details   从 1 开始顺序编号，方向参考 @ref LocalMap::m_drivingSid
+	};
+	repeated MatchInfo m_matches = 7;
+	float              m_heading = 8; 
+};
+
+
+enum RoadClass {
+	Unknown         = 0;    ///< 未调查
+	UrbanHighway    = 1;    ///< 都市间高速
+	UrbanSealedRoad = 2;    ///< 都市内封闭路
+	NationalRoad    = 3;    ///< 国道
+	ProvincialRoad  = 4;    ///< 省道
+	CountyRoad      = 5;    ///< 县道
+	OrdinaryRoad    = 6;    ///< 一般道路
+	NarrowRoad      = 7;    ///< 细道路
+};
+
+enum RoadType {
+	NoSpecial               = 0;   ///< 普通道路
+	Ramp                    = 1;    ///< 匝道
+	Roundabout              = 2;    ///< 环岛
+	Parallel                = 3;    ///< 平行于封闭道路的link
+	ServiceRoad             = 4;    ///< 主辅连接路
+	MainRoad                = 5;    ///< 主路
+	Square                  = 6;    ///< 未定义交通区域
+	PedestrianZone          = 7;    ///< 园区内内部路
+	Pedestrian              = 8;    ///< 步行街
+	RoundaboutInterior      = 9;    ///< 环岛内连接路
+	SlipRoad                = 10;   ///< 提前右转/左转/掉头专用道
+	SpecialTrafficFigure    = 11;   ///< 类似于环岛
+	Boundary                = 12;   ///< 区域边界线（比如国界线，省界线）
+};
+
+enum RoadAttribute {
+	ControlAccess       = 0;    ///< 封闭道路
+	UTurn               = 1;    ///< 掉头路
+	Parking             = 2;    ///< 园区内部路
+	Elevated            = 3;    ///< 高架
+	Underpass           = 4;    ///< 地下通道
+	UnderConstruction   = 5;    ///< 在建道路
+	Motorway            = 6;    ///< 高速道路
+	ServiceArea         = 7;    ///< 服务区道路
+	Toll                = 8;    ///< 收费站道路
+	ComplexIntersection = 9;    ///< 复杂交叉点
+	PluralJunction      = 10;   ///< 复合路口
+	Bridge              = 24;    ///< 桥梁
+	Tunnel              = 25;   ///< 隧道
+};
+
+enum ZLevelType {
+    Invalid             = 0; ///< 无效
+    Overground          = 1; ///< 路面以上包含路面
+    ConnectOverground   = 2; ///< 接驳上层
+    Underground         = 3; ///< 路面以下
+    ConnectUnderground  = 4; ///< 接驳下层
+};
+
+message Waypoint{
+	Coordinate  m_coordinate = 1;                           ///< 坐标
+    	int32     m_heading       = 2;      ///< @brief     形点航向角
+                                                        ///< @details   正北为 0，顺时针增加，单位：0.0001 弧度，范围：@f$[0, 2\pi\times10000)@f$
+    	int32     m_curvature     = 3;    ///< 曲率
+    	int32     m_slope         = 4;         ///< @brief     纵向坡度
+                                                        ///< @details   沿行驶方向, 下坡为负、上坡为正
+    	int32     m_crossSlope    = 5;         ///< @brief     横向坡度
+                                                        ///< @details   沿行驶方向, 左高为正、左低为负
+    	uint32    m_width         = 6;      
+};
+
+message Lane{
+	uint64                   m_key               = 1;                ///< 车道的键
+    	uint32                   m_laneIndex         = 2;                            ///< @brief     车道的序号
+                                                                                   ///< @details   从 1 开始顺序编号，方向参考 @ref LocalMap::m_drivingSide
+	uint32                   m_length            = 3; 
+	repeated Waypoint        m_waypoints 	     = 4;
+};
+
+message Line{
+	uint64			m_LineID = 1;
+	uint32			m_LaneLineIndex = 2;
+	uint32			m_ElementSequence = 3;
+	repeated Point		m_Points = 4;
+};
+
+message RoadSection{
+	uint64   		    m_key = 1;
+	RoadClass                   m_roadClass     = 2;   ///< 道路等级
+    	RoadType                    m_roadType      = 3;
+	repeated RoadAttribute      m_attributes    = 4;
+	repeated Lane               m_lanes = 5;	    
+};
+message LocalMap{
+	uint64            m_timestamp = 1;
+	uint64            m_age = 2;
+	uint32            m_counter = 3;
+	Coordinate        m_mapCenter = 4;
+	float             m_mapRange = 5;
+	float             m_heading = 6;
+	uint64            m_lastTimestamp = 7;
+	DatumPoint        m_datumPoint = 8;
+	repeated RoadSection m_roadSections = 9;
+	repeated Line	     m_LineMap = 10;
+};

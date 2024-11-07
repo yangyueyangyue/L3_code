@@ -1,0 +1,58 @@
+syntax = "proto2";
+
+import "header.proto";
+
+package phoenix.msg.perception;
+
+
+message TrafficLight {
+  enum Color {
+    UNKNOWN_COLOR = 0;
+    RED = 1;
+    YELLOW = 2;
+    GREEN = 3;
+    BLACK = 4;
+  };
+  enum Type {
+    UNKNOWN_TYPE = 0;
+    STRAIGHT = 1;
+    LEFT = 2;
+    RIGHT = 3;
+    U_TURN = 4;
+  };
+  message Box {
+    optional float x = 1 [default = 0];
+    optional float y = 2 [default = 0];
+    optional float width = 3 [default = 0];
+    optional float height = 4 [default = 0];
+    optional int32 camera_id = 5 [default = 0];
+  };
+
+  // Traffic light string-ID in the map data.
+  optional string id = 1;
+  // Color of Traffic Light
+  optional Color color = 2 [default = UNKNOWN_COLOR];
+  // Type of Traffic Light
+  repeated Type type = 3;
+  // Box of Traffic Light
+  optional Box box = 4;
+  // How confidence about the detected results, between 0 and 100.
+  optional int32 confidence = 5 [default = 0];
+  // Duration of the traffic light since detected.
+  optional float tracking_time = 6 [default = 0];
+  // Is traffic blinking
+  optional bool blink = 7 [default = false];
+  // traffic light remaining time, (unit: s, < 0 is invalid).
+  optional int32 remaining_time = 8 [default = -1];
+};
+
+
+message TrafficLightList {
+  // 报文头
+  optional common.Header header = 1;
+
+  // 红绿灯列表
+  repeated TrafficLight traffic_lights = 2;
+};
+
+

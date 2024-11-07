@@ -1,0 +1,77 @@
+syntax = "proto3";
+package phoenix.ad_data_upload;
+option optimize_for = LITE_RUNTIME;
+message OBBox_message
+{
+				float	x = 1;
+				float	y = 2;
+				float	heading = 3;
+				float	half_width = 4;
+				float	half_length = 5;
+};
+message ProjOnMajorRefLine_message
+{
+				sint32	valid = 1;
+				float	x = 2;
+				float	y = 3;
+				float	heading = 4;
+				float	curvature = 5;
+				float	s = 6;
+				float	l = 7;
+};
+message PredPath_message
+{
+				float	x = 1;
+				float	y = 2;
+				float	heading = 3;
+				float	s = 4;
+};
+message TrackedPath_message
+{
+				float	x = 1;
+				float	y = 2;
+};
+message Obstacle_message
+{
+				sint32	id = 1;
+				float	x = 2;
+				float	y = 3;
+				OBBox_message	obb = 4;
+				float	height = 5;
+				float	height_to_ground = 6;
+				sint32	type = 7;
+				sint32	dynamic = 8;
+				sint32	confidence = 9;
+				sint32	perception_type = 10;
+				float	v_x = 11;
+				float	v_y = 12;
+				float	v = 13;
+				float	a_x = 14;
+				float	a_y = 15;
+				float	a = 16;
+				ProjOnMajorRefLine_message	proj_on_major_ref_line = 17;
+				sint32	pred_path_num = 18;
+				repeated sint32	pred_path_point_num = 19;
+				repeated PredPath_message	pred_path = 20;
+				sint32	tracked_path_point_num = 21;
+				repeated TrackedPath_message	tracked_path = 22;
+};
+message Msg_head_message
+{
+	    	bool	valid = 1;
+				uint32	sequence = 2;
+				sint32	timestamp = 3;
+				sint32	time_offset = 4;
+				uint32	src_module_id = 5;
+				uint32	dst_module_id = 6;
+};
+message ObstacleList_message
+{
+				Msg_head_message	msg_head = 1;
+				sint32	obstacle_num = 2;
+				repeated Obstacle_message	Obstacles = 3;
+};
+message Perception_Display_Data_message
+{
+				ObstacleList_message	obstacle_list = 1;
+};

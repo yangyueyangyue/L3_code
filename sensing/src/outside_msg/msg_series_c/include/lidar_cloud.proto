@@ -1,0 +1,36 @@
+syntax = "proto2";
+
+package phoenix.msg.perception;
+
+import "header.proto";
+
+
+message LidarCloud {
+  // 雷达类型定义
+  enum LidarType {
+    LIDAR_TYPE_UNKNOWN = 0;
+    LIDAR_TYPE_IBEO_4 = 1;
+    LIDAR_TYPE_VLP_16 = 2;
+  };
+
+  // 点定义
+  message CloudPoint {
+    // Scan layer of this point (zero- based)
+    optional int32 layer = 1 [default = 0];
+    // 位置x坐标 (m)
+    optional float x = 2 [default = 0];
+    // 位置y坐标 (m)
+    optional float y = 3 [default = 0];
+    // 位置z坐标 (m)
+    optional float z = 4 [default = 0];
+  }
+
+  // 报文头
+  optional common.Header header = 1;
+  // 雷达类型
+  optional LidarType lidar_type = 2 [default = LIDAR_TYPE_UNKNOWN];
+  // 障碍物列表
+  repeated CloudPoint points = 3;
+}
+
+

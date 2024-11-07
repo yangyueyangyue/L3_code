@@ -1,0 +1,20 @@
+syntax = "proto2";
+
+package phoenix.msg.routing;
+
+import "header.proto";
+message Pos {
+// 最近车道id
+optional string nearest_lane_id = 1;
+// 与地图车道中心线的纵向距离
+optional double s = 2 [default = 0];
+// 与地图车道中心线的偏移距离
+optional double l = 3 [default = 0];
+// 航向角偏差
+optional double heading = 4 [default = 0];
+};
+message MapLocalization {
+/// 报文头
+optional common.Header header =1;
+optional Pos point = 2;
+};

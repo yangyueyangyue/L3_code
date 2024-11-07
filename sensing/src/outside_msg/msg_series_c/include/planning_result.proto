@@ -1,0 +1,143 @@
+syntax = "proto2";
+
+package phoenix.msg.planning;
+
+import "header.proto";
+
+
+message PlanningResult {
+  // 定义驾驶模式
+  enum DrivingMode {
+    DRIVING_MODE_INVALID = 0;
+    DRIVING_MODE_MANUAL = 1;
+    DRIVING_MODE_ROBOTIC = 2;
+  };
+  // 定义档位
+  enum Gear {
+    GEAR_INVALID = 0;
+    GEAR_P = 1;
+    GEAR_N = 2;
+    GEAR_R = 3;
+    GEAR_D = 4;
+  };
+  // 定义转向灯
+  enum TurnLamp {
+    TURN_LAMP_INVALID = 0;
+    TURN_LAMP_OFF = 1;
+    TURN_LAMP_LEFT = 2;
+    TURN_LAMP_RIGHT = 3;
+    TURN_LAMP_EMERGENCY = 4;
+  };
+  // 定义灯光
+  enum Lamp {
+    LAMP_INVALID = 0;
+    LAMP_OFF = 1;
+    LAMP_ON = 2;
+  };
+  // 定义轨迹方向
+  enum TrjDirection {
+    TRJ_DIRECTION_FORWARD = 0;
+    TRJ_DIRECTION_BACKWARD = 1;
+  };
+
+  /// 报文头
+  optional common.Header header = 1;
+
+  // 当前决策模块的状态
+  optional int32 cur_status = 2 [default  = 0];
+
+  // 驾驶模式请求
+  optional DrivingMode tar_driving_mode = 3 [default  = DRIVING_MODE_INVALID];
+  // 使能转向系统
+  optional bool enable_eps = 4 [default  = false];
+  // 使能油门系统
+  optional bool enable_throttle_sys = 5 [default  = false];
+  // 使能制动系统
+  optional bool enable_ebs = 6 [default  = false];
+
+  // 保持当前方向盘角度不变
+  optional bool hold_steering_wheel = 7 [default  = false];
+  // 释放油门
+  optional bool release_throttle = 8 [default  = false];
+
+  // 档位请求
+  optional Gear tar_gear = 9 [default  = GEAR_INVALID];
+  // 转向指示灯请求
+  optional TurnLamp tar_turn_lamp = 10 [default  = TURN_LAMP_INVALID];
+  // 制动灯请求
+  optional Lamp tar_brake_lamp = 11 [default  = LAMP_OFF];
+  // 速度请求
+  optional double tar_v = 12 [default  = 0];
+  // 加速度请求
+  optional double tar_a = 13 [default  = 0];
+
+  // 定义目标轨迹
+  message TarTrj {
+    // 位置
+    message Pos {
+      // 坐标x
+      optional double x = 1 [default  = 0];
+      // 坐标
+      optional double y = 2 [default  = 0];
+      // 航向角,  Range: (-pi, pi rad)
+      optional double h = 3 [default  = 0];
+      // 曲率
+      optional double c = 4 [default  = 0];
+      // 相对于参考线的路径长
+      optional double s = 5 [default  = 0];
+      // 相对于参考线的横向偏移
+      optional double l = 6 [default  = 0];
+    };
+    // 横向误差
+    message LatErr {
+      // 横向误差采样点
+      message Samples {
+        // 横向误差
+        optional double lat_err = 1 [default  = 0];
+        // 横向误差变化速率
+        optional double lat_err_chg_rate = 2 [default  = 0];
+        // 角度误差, Range: (-pi, pi rad)
+        optional double yaw_err = 3 [default  = 0];
+        // 角度误差变化速率
+        optional double yaw_err_chg_rate = 4 [default  = 0];
+      };
+      /// 移动标记
+      optional int32 moving_flag = 1 [default  = 0];
+      /// 横向误差采样点
+      repeated Samples samples = 2;
+    };
+    // 轨迹点
+    message TrjPoint {
+      // 坐标x
+      optional double x = 1 [default  = 0];
+      // 坐标y
+      optional double y = 2 [default  = 0];
+      // 航向角, Range: (-pi, pi rad)
+      optional double h = 3 [default  = 0];
+      // 曲率
+      optional double c = 4 [default  = 0];
+      // 沿着轨迹的长度
+      optional double s = 5 [default  = 0];
+    };
+
+    // 目标轨迹的时间戳，用于时间及空间同步
+    optional int64 timestamp = 1 [default  = 0];
+    // 当前车辆位置
+    optional Pos curr_pos = 2;
+    // 先导点位置
+    optional Pos leading_pos = 3;
+    // 横向误差
+    optional LatErr lat_err = 4;
+    // 目标轨迹的方向
+    optional TrjDirection trj_direction = 5 [default = TRJ_DIRECTION_FORWARD];
+    // 目标轨迹点的数量
+    optional int32 points_num = 6 [default  = 0];
+    // 目标轨迹点
+    repeated TrjPoint points = 7;
+  };
+
+  // 目标轨迹
+  optional TarTrj tar_trj = 14;
+}
+
+

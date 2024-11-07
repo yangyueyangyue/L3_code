@@ -1,0 +1,338 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<root>
+ <tabbed_widget parent="main_window" name="Main Window">
+  <Tab containers="1" tab_name="Overview">
+   <Container>
+    <DockSplitter orientation="-" count="6" sizes="0.1665;0.165503;0.167498;0.157527;0.176471;0.1665">
+     <DockArea name="...">
+      <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+       <range bottom="16.792272" top="27.476612" left="1709106391.275629" right="1709110255.576327"/>
+       <limitY/>
+       <curve name="/planning/debug/VelPlanning/output/tar_v" color="#f14cc1"/>
+      </plot>
+     </DockArea>
+     <DockArea name="...">
+      <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+       <range bottom="-1.524901" top="0.352629" left="1709106391.275629" right="1709110255.576327"/>
+       <limitY/>
+       <curve name="/planning/debug/VelPlanning/output/tar_a" color="#9467bd"/>
+      </plot>
+     </DockArea>
+     <DockArea name="...">
+      <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+       <range bottom="-1.524901" top="0.352629" left="1709106391.275629" right="1709110255.576327"/>
+       <limitY/>
+       <curve name="/planning/debug/VelPlanning/internal/tar_a_smoothed" color="#ff7f0e"/>
+      </plot>
+     </DockArea>
+     <DockArea name="...">
+      <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+       <range bottom="16.774450" top="28.207323" left="1709106391.275629" right="1709110255.576327"/>
+       <limitY/>
+       <curve name="/planning/debug/VelPlanning/internal/tar_v_smoothed" color="#bcbd22"/>
+      </plot>
+     </DockArea>
+     <DockArea name="...">
+      <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+       <range bottom="-1.544442" top="0.322119" left="1709106391.275629" right="1709110255.576327"/>
+       <limitY/>
+       <curve name="/planning/debug/VelPlanning/internal/tar_a_following" color="#f14cc1"/>
+      </plot>
+     </DockArea>
+     <DockArea name="...">
+      <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+       <range bottom="-0.699691" top="28.687333" left="1709106391.275629" right="1709110255.576327"/>
+       <limitY/>
+       <curve name="/planning/debug/VelPlanning/internal/tar_v_following" color="#9467bd"/>
+      </plot>
+     </DockArea>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <Tab containers="1" tab_name="CIPV">
+   <Container>
+    <DockSplitter orientation="-" count="5" sizes="0.200199;0.199203;0.200199;0.200199;0.200199">
+     <DockSplitter orientation="|" count="2" sizes="0.5;0.5">
+      <DockArea name="...">
+       <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+        <range bottom="-4.871764" top="199.742339" left="1709106391.275629" right="1709110255.576327"/>
+        <limitY/>
+        <curve name="/planning/debug/VelPlanning/output/obs_dist_to_obj" color="#17becf"/>
+       </plot>
+      </DockArea>
+      <DockArea name="...">
+       <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+        <range bottom="-5.009238" top="205.378776" left="1709106391.275629" right="1709110255.576327"/>
+        <limitY/>
+        <curve name="/planning/debug/VelPlanning/internal/cipv/dist_to_obj" color="#d62728"/>
+       </plot>
+      </DockArea>
+     </DockSplitter>
+     <DockSplitter orientation="|" count="2" sizes="0.5;0.5">
+      <DockArea name="...">
+       <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+        <range bottom="-1.423958" top="102.473755" left="1709106391.275629" right="1709110255.576327"/>
+        <limitY/>
+        <curve name="/planning/debug/VelPlanning/output/obs_ttc" color="#bcbd22"/>
+       </plot>
+      </DockArea>
+      <DockArea name="...">
+       <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+        <range bottom="-1.423958" top="102.473755" left="1709106391.275629" right="1709110255.576327"/>
+        <limitY/>
+        <curve name="/planning/debug/VelPlanning/internal/cipv/ttc" color="#1ac938"/>
+       </plot>
+      </DockArea>
+     </DockSplitter>
+     <DockSplitter orientation="|" count="2" sizes="0.5;0.5">
+      <DockArea name="...">
+       <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+        <range bottom="-0.906566" top="37.169212" left="1709106391.275629" right="1709110255.576327"/>
+        <limitY/>
+        <curve name="/planning/debug/VelPlanning/output/obs_abs_v" color="#1f77b4"/>
+       </plot>
+      </DockArea>
+      <DockArea name="...">
+       <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+        <range bottom="-1.011681" top="41.478928" left="1709106391.275629" right="1709110255.576327"/>
+        <limitY/>
+        <curve name="/planning/debug/VelPlanning/internal/cipv/perception_obstacle/v" color="#ff7f0e"/>
+       </plot>
+      </DockArea>
+     </DockSplitter>
+     <DockArea name="...">
+      <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+       <range bottom="-0.699691" top="28.687333" left="1709106391.275629" right="1709110255.576327"/>
+       <limitY/>
+       <curve name="/planning/debug/VelPlanning/internal/tar_v_following" color="#9467bd"/>
+      </plot>
+     </DockArea>
+     <DockArea name="...">
+      <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+       <range bottom="-1.544442" top="0.322119" left="1709106391.275629" right="1709110255.576327"/>
+       <limitY/>
+       <curve name="/planning/debug/VelPlanning/internal/tar_a_following" color="#f14cc1"/>
+      </plot>
+     </DockArea>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <Tab containers="1" tab_name="Cruise-to-Following">
+   <Container>
+    <DockSplitter orientation="-" count="6" sizes="0.1665;0.167498;0.177468;0.123629;0.180459;0.184447">
+     <DockArea name="...">
+      <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+       <range bottom="0.650000" top="15.350000" left="1709106391.197006" right="1709110255.647147"/>
+       <limitY/>
+       <curve name="/planning/debug/VelPlanning/output/tar_type" color="#1ac938"/>
+      </plot>
+     </DockArea>
+     <DockArea name="...">
+      <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+       <range bottom="37.655358" top="103.189235" left="1709106391.197006" right="1709110255.647147"/>
+       <limitY/>
+       <curve name="/control/debug/chassis_input/VehDa_vEgoSpd_mp" color="#1ac938">
+        <transform name="Scale/Offset" alias="/control/debug/chassis_input/VehDa_vEgoSpd_mp[Scale/Offset]">
+         <options value_scale="3.6" time_offset="0" value_offset="0"/>
+        </transform>
+       </curve>
+       <curve name="/planning/debug/VelPlanning/internal/upper_limit_v_final" color="#d62728">
+        <transform name="Scale/Offset" alias="/planning/debug/VelPlanning/internal/upper_limit_v_final[Scale/Offset]">
+         <options value_scale="3.6" time_offset="0" value_offset="0"/>
+        </transform>
+       </curve>
+      </plot>
+     </DockArea>
+     <DockArea name="...">
+      <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+       <range bottom="-2.541701" top="104.209752" left="1709106391.197006" right="1709110255.647147"/>
+       <limitY/>
+       <curve name="/planning/debug/VelPlanning/internal/tar_v_cruise" color="#f14cc1">
+        <transform name="Scale/Offset" alias="/planning/debug/VelPlanning/internal/tar_v_cruise[Scale/Offset]">
+         <options value_scale="3.6" time_offset="0" value_offset="0"/>
+        </transform>
+       </curve>
+       <curve name="/planning/debug/VelPlanning/internal/tar_v_following" color="#d62728">
+        <transform name="Scale/Offset" alias="/planning/debug/VelPlanning/internal/tar_v_following[Scale/Offset]">
+         <options value_scale="3.6" time_offset="0" value_offset="0"/>
+        </transform>
+       </curve>
+      </plot>
+     </DockArea>
+     <DockArea name="...">
+      <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+       <range bottom="-1.545387" top="0.360857" left="1709106391.197006" right="1709110255.647147"/>
+       <limitY/>
+       <curve name="/planning/debug/VelPlanning/internal/tar_a_following" color="#1f77b4"/>
+       <curve name="/planning/debug/VelPlanning/internal/tar_a_cruise" color="#ff7f0e"/>
+      </plot>
+     </DockArea>
+     <DockArea name="...">
+      <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+       <range bottom="-5.009238" top="205.378776" left="1709106391.197006" right="1709110255.647147"/>
+       <limitY/>
+       <curve name="/planning/debug/VelPlanning/internal/cipv/dist_to_obj" color="#9467bd"/>
+       <curve name="/planning/debug/VelPlanning/output/obs_dist_to_obj" color="#17becf"/>
+      </plot>
+     </DockArea>
+     <DockArea name="...">
+      <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+       <range bottom="-3.642052" top="149.324141" left="1709106391.197006" right="1709110255.647147"/>
+       <limitY/>
+       <curve name="/planning/debug/VelPlanning/internal/cipv/v_for_plan" color="#bcbd22">
+        <transform name="Scale/Offset" alias="/planning/debug/VelPlanning/internal/cipv/v_for_plan[Scale/Offset]">
+         <options value_scale="3.6" time_offset="0" value_offset="0"/>
+        </transform>
+       </curve>
+       <curve name="/planning/debug/VelPlanning/internal/cipv/perception_obstacle/v" color="#1f77b4">
+        <transform name="Scale/Offset" alias="/planning/debug/VelPlanning/internal/cipv/perception_obstacle/v[Scale/Offset]">
+         <options value_scale="3.6" time_offset="0" value_offset="0"/>
+        </transform>
+       </curve>
+      </plot>
+     </DockArea>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <Tab containers="1" tab_name="CutIn">
+   <Container>
+    <DockSplitter orientation="-" count="1" sizes="1">
+     <DockArea name="...">
+      <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+       <range bottom="0.000000" top="1.000000" left="0.000000" right="1.000000"/>
+       <limitY/>
+      </plot>
+     </DockArea>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <Tab containers="1" tab_name="Steady-Following">
+   <Container>
+    <DockSplitter orientation="-" count="1" sizes="1">
+     <DockArea name="...">
+      <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+       <range bottom="0.000000" top="1.000000" left="0.000000" right="1.000000"/>
+       <limitY/>
+      </plot>
+     </DockArea>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <Tab containers="1" tab_name="Stop-Go">
+   <Container>
+    <DockSplitter orientation="-" count="6" sizes="0.167498;0.1665;0.165503;0.1665;0.158524;0.175474">
+     <DockArea name="...">
+      <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+       <range bottom="0.650000" top="15.350000" left="1709106391.197006" right="1709110255.647147"/>
+       <limitY/>
+       <curve name="/planning/debug/VelPlanning/output/tar_type" color="#1ac938"/>
+      </plot>
+     </DockArea>
+     <DockArea name="...">
+      <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+       <range bottom="-2.097500" top="1.997500" left="1709106391.197006" right="1709110255.647147"/>
+       <limitY/>
+       <curve name="/planning/debug/VelPlanning/output/ADASV2_cur_slope" color="#ff7f0e"/>
+      </plot>
+     </DockArea>
+     <DockArea name="...">
+      <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+       <range bottom="-4.871764" top="199.742339" left="1709106391.197006" right="1709110255.647147"/>
+       <limitY/>
+       <curve name="/planning/debug/VelPlanning/output/obs_dist_to_obj" color="#17becf"/>
+      </plot>
+     </DockArea>
+     <DockArea name="...">
+      <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+       <range bottom="-3.263638" top="133.809163" left="1709106391.197006" right="1709110255.647147"/>
+       <limitY/>
+       <curve name="/planning/debug/VelPlanning/output/obs_abs_v" color="#f14cc1">
+        <transform name="Scale/Offset" alias="/planning/debug/VelPlanning/output/obs_abs_v[Scale/Offset]">
+         <options value_scale="3.6" time_offset="0" value_offset="0"/>
+        </transform>
+       </curve>
+      </plot>
+     </DockArea>
+     <DockArea name="...">
+      <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+       <range bottom="60.361458" top="102.635428" left="1709106391.197006" right="1709110255.647147"/>
+       <limitY/>
+       <curve name="/planning/debug/VelPlanning/output/tar_v" color="#9467bd">
+        <transform name="Scale/Offset" alias="/planning/debug/VelPlanning/output/tar_v[Scale/Offset]">
+         <options value_scale="3.6" time_offset="0" value_offset="0"/>
+        </transform>
+       </curve>
+       <curve name="/control/debug/chassis_input/VehDa_vEgoSpd_mp" color="#1ac938">
+        <transform name="Scale/Offset" alias="/control/debug/chassis_input/VehDa_vEgoSpd_mp[Scale/Offset]">
+         <options value_scale="3.6" time_offset="0" value_offset="0"/>
+        </transform>
+       </curve>
+      </plot>
+     </DockArea>
+     <DockArea name="...">
+      <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+       <range bottom="-1.528422" top="0.496991" left="1709106391.197006" right="1709110255.647147"/>
+       <limitY/>
+       <curve name="/planning/debug/VelPlanning/output/tar_a" color="#17becf"/>
+       <curve name="/control/debug/chassis_input/VehDa_aEgoAcc_mp" color="#bcbd22"/>
+       <curve name="/control/debug/lon_debug/control_long_EBS_aReq" color="#1f77b4"/>
+      </plot>
+     </DockArea>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <Tab containers="1" tab_name="Cutout">
+   <Container>
+    <DockSplitter orientation="-" count="1" sizes="1">
+     <DockArea name="...">
+      <plot flip_x="false" style="Lines" mode="TimeSeries" flip_y="false">
+       <range bottom="0.000000" top="1.000000" left="0.000000" right="1.000000"/>
+       <limitY/>
+      </plot>
+     </DockArea>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <currentTabIndex index="5"/>
+ </tabbed_widget>
+ <use_relative_time_offset enabled="0"/>
+ <!-- - - - - - - - - - - - - - - -->
+ <!-- - - - - - - - - - - - - - - -->
+ <Plugins>
+  <plugin ID="DataLoad CSV">
+   <default delimiter="0" time_axis=""/>
+  </plugin>
+  <plugin ID="DataLoad MCAP"/>
+  <plugin ID="DataLoad ROS bags">
+   <use_header_stamp value="false"/>
+   <discard_large_arrays value="true"/>
+   <max_array_size value="100"/>
+   <boolean_strings_to_number value="true"/>
+   <remove_suffix_from_strings value="true"/>
+  </plugin>
+  <plugin ID="DataLoad ULog"/>
+  <plugin ID="ROS Topic Subscriber">
+   <use_header_stamp value="false"/>
+   <discard_large_arrays value="true"/>
+   <max_array_size value="100"/>
+   <boolean_strings_to_number value="true"/>
+   <remove_suffix_from_strings value="true"/>
+  </plugin>
+  <plugin ID="UDP Server"/>
+  <plugin ID="WebSocket Server"/>
+  <plugin ID="ZMQ Subscriber"/>
+  <plugin ID="Fast Fourier Transform"/>
+  <plugin ID="Quaternion to RPY"/>
+  <plugin ID="Reactive Script Editor">
+   <library code="--[[ Helper function to create a series from arrays&#xa;&#xa; new_series: a series previously created with ScatterXY.new(name)&#xa; prefix:     prefix of the timeseries, before the index of the array&#xa; suffix_X:   suffix to complete the name of the series containing the X value. If [nil], use the index of the array.&#xa; suffix_Y:   suffix to complete the name of the series containing the Y value&#xa; timestamp:   usually the tracker_time variable&#xa;              &#xa; Example:&#xa; &#xa; Assuming we have multiple series in the form:&#xa; &#xa;   /trajectory/node.{X}/position/x&#xa;   /trajectory/node.{X}/position/y&#xa;   &#xa; where {N} is the index of the array (integer). We can create a reactive series from the array with:&#xa; &#xa;   new_series = ScatterXY.new(&quot;my_trajectory&quot;) &#xa;   CreateSeriesFromArray( new_series, &quot;/trajectory/node&quot;, &quot;position/x&quot;, &quot;position/y&quot;, tracker_time );&#xa;--]]&#xa;&#xa;function CreateSeriesFromArray( new_series, prefix, suffix_X, suffix_Y, timestamp )&#xa;  &#xa;  --- clear previous values&#xa;  new_series:clear()&#xa;  &#xa;  --- Append points to new_series&#xa;  index = 0&#xa;  while(true) do&#xa;&#xa;    x = index;&#xa;    -- if not nil, get the X coordinate from a series&#xa;    if suffix_X ~= nil then &#xa;      series_x = TimeseriesView.find( string.format( &quot;%s.%d/%s&quot;, prefix, index, suffix_X) )&#xa;      if series_x == nil then break end&#xa;      x = series_x:atTime(timestamp)&#x9; &#xa;    end&#xa;    &#xa;    series_y = TimeseriesView.find( string.format( &quot;%s.%d/%s&quot;, prefix, index, suffix_Y) )&#xa;    if series_y == nil then break end &#xa;    y = series_y:atTime(timestamp)&#xa;    &#xa;    new_series:push_back(x,y)&#xa;    index = index+1&#xa;  end&#xa;end&#xa;&#xa;--[[ Similar to the built-in function GetSeriesNames(), but select only the names with a give prefix. --]]&#xa;&#xa;function GetSeriesNamesByPrefix(prefix)&#xa;  -- GetSeriesNames(9 is a built-in function&#xa;  all_names = GetSeriesNames()&#xa;  filtered_names = {}&#xa;  for i, name in ipairs(all_names)  do&#xa;    -- check the prefix&#xa;    if name:find(prefix, 1, #prefix) then&#xa;      table.insert(filtered_names, name);&#xa;    end&#xa;  end&#xa;  return filtered_names&#xa;end&#xa;&#xa;--[[ Modify an existing series, applying offsets to all their X and Y values&#xa;&#xa; series: an existing timeseries, obtained with TimeseriesView.find(name)&#xa; delta_x: offset to apply to each x value&#xa; delta_y: offset to apply to each y value &#xa;  &#xa;--]]&#xa;&#xa;function ApplyOffsetInPlace(series, delta_x, delta_y)&#xa;  -- use C++ indeces, not Lua indeces&#xa;  for index=0, series:size()-1 do&#xa;    x,y = series:at(index)&#xa;    series:set(index, x + delta_x, y + delta_y)&#xa;  end&#xa;end&#xa;"/>
+   <scripts/>
+  </plugin>
+  <plugin ID="CSV Exporter"/>
+  <plugin ID="ROS /rosout Visualization"/>
+  <plugin ID="ROS Topic Re-Publisher"/>
+ </Plugins>
+ <!-- - - - - - - - - - - - - - - -->
+ <!-- - - - - - - - - - - - - - - -->
+ <!-- - - - - - - - - - - - - - - -->
+</root>
+

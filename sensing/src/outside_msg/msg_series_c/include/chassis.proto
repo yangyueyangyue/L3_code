@@ -1,0 +1,181 @@
+syntax = "proto2";
+
+package phoenix.msg.control;
+
+import "header.proto";
+
+message Chassis {
+
+  enum DrivingMode {
+    DRIVING_MODE_INVALID = 0;
+    DRIVING_MODE_MANUAL = 1;
+    DRIVING_MODE_ROBOTIC = 2;
+  };
+
+  enum EStop {
+    E_STOP_INVALID = 0;
+    E_STOP_OFF = 1;
+    E_STOP_ON = 2;
+  };
+
+  // 方向盘控制状态
+  enum EpsStatus {
+    EPS_STATUS_INVALID = 0;
+    EPS_STATUS_MANUAL = 1;
+    EPS_STATUS_ROBOTIC = 2;
+    EPS_STATUS_MANUAL_INTERRUPT = 3;
+    EPS_STATUS_ERROR = 4;
+  };
+
+  // 油门系统控制状态
+  enum ThrottleSysStatus {
+    THROTTLE_SYS_STATUS_INVALID = 0;
+    THROTTLE_SYS_STATUS_MANUAL = 1;
+    THROTTLE_SYS_STATUS_ROBOTIC = 2;
+    THROTTLE_SYS_STATUS_ERROR = 3;
+  };
+
+  // 制动系统控制状态
+  enum EbsStatus {
+    EBS_STATUS_INVALID = 0;
+    EBS_STATUS_MANUAL = 1;
+    EBS_STATUS_ROBOTIC = 2;
+    EBS_STATUS_ERROR = 3;
+  };
+
+  enum GearPosition {
+    GEAR_INVALID = 0;
+    GEAR_P = 1;
+    GEAR_N = 2;
+    GEAR_R = 3;
+    GEAR_D = 4;
+  };
+
+  enum SignalLamp{
+    LAMP_INVALID = 0;
+    LAMP_OFF = 1;
+    LAMP_ON = 2;
+  };
+
+  enum SignalTurnLamp {
+    TURN_LAMP_INVALID = 0;
+    TURN_LAMP_OFF = 1;
+    TURN_LAMP_LEFT = 2;
+    TURN_LAMP_RIGHT = 3;
+    TURN_LAMP_EMERGENCY = 4;
+  };
+
+  enum SignalTurningIndicator {
+    TURNING_INDICATOR_INVALID = 0;
+    TURNING_INDICATOR_NONE = 1;
+    TURNING_INDICATOR_LEFT = 2;
+    TURNING_INDICATOR_RIGHT = 3;
+  };
+
+  enum EpbStatus {
+    EPB_STATUS_INVALID = 0;
+    EPB_STATUS_OFF = 1;
+    EPB_STATUS_ON = 2;
+  };
+
+  // Header
+  optional common.Header header = 1;
+
+  // 驾驶模式
+  optional DrivingMode driving_mode = 2 [default = DRIVING_MODE_INVALID];
+  // 紧急停止信号
+  optional EStop e_stop = 3 [default = E_STOP_INVALID];
+
+  // 方向盘控制状态
+  optional EpsStatus eps_status = 4 [default = EPS_STATUS_INVALID];
+  // 油门系统控制状态
+  optional ThrottleSysStatus throttle_sys_status = 5 [default = THROTTLE_SYS_STATUS_INVALID];
+  // 制动系统控制状态
+  optional EbsStatus ebs_status = 6 [default = EBS_STATUS_INVALID];
+
+  // 方向盘角度有效位
+  optional bool steering_wheel_angle_valid = 7 [default = false];
+  // 方向盘角度 (rad)
+  optional float steering_wheel_angle = 8 [default  = 0];
+  // 方向盘转速有效位
+  optional bool steering_wheel_speed_valid = 9 [default = false];
+  // 方向盘转速 (rad/s)
+  optional float steering_wheel_speed = 10 [default  = 0];
+  // 实际转向扭矩有效位
+  optional bool steering_wheel_torque_valid = 11 [default  = false];
+  // 实际转向扭矩(N.m)
+  optional float steering_wheel_torque = 12 [default  = 0];
+
+  // 车速有效位
+  optional bool velocity_valid = 13 [default = false];
+  // 车速(m/s)
+  optional float velocity = 14 [default  = 0];
+  // 加速度有效位
+  optional bool acceleration_valid = 15 [default = false];
+  // 加速度
+  optional float acceleration = 16 [default  = 0];
+  // Yaw Rate有效位
+  optional bool yaw_rate_valid = 17 [default = false];
+  // Yaw Rate(rad/s)
+  optional float yaw_rate = 18 [default  = 0];
+  // AX 有效位
+  optional bool ax_valid = 19 [default = false];
+  // AX(m/s^2)
+  optional float ax = 20 [default  = 0];
+  // AY 有效位
+  optional bool ay_valid = 21 [default = false];
+  // AY(m/s^2)
+  optional float ay = 22 [default  = 0];
+
+  // 左前轮速有效位
+  optional bool wheel_speed_fl_valid = 23 [default = false];
+  // 左前轮速(m/s)
+  optional float wheel_speed_fl = 24 [default  = 0];
+  // 右前轮速有效位
+  optional bool wheel_speed_fr_valid = 25 [default = false];
+  // 右前轮速(m/s)
+  optional float wheel_speed_fr = 26 [default  = 0];
+  // 左后轮速有效位
+  optional bool wheel_speed_rl_valid = 27 [default = false];
+  // 左后轮速(m/s)
+  optional float wheel_speed_rl = 28 [default  = 0];
+  // 右后轮速有效位
+  optional bool wheel_speed_rr_valid = 29 [default = false];
+  // 右后轮速(m/s)
+  optional float wheel_speed_rr = 30 [default  = 0];
+  // 左后2#轮速有效位
+  optional bool wheel_speed_rl2_valid = 31 [default = false];
+  // 左后2#轮速(m/s)
+  optional float wheel_speed_rl2 = 32 [default  = 0];
+  // 右后2#轮速有效位
+  optional bool wheel_speed_rr2_valid = 33 [default = false];
+  // 右后2#轮速(m/s)
+  optional float wheel_speed_rr2 = 34 [default  = 0];
+
+  // 驻车系统状态, 0x0:无效，0x1:驻车解除, 0x2:驻车中
+  optional EpbStatus epb_status = 35 [default = EPB_STATUS_INVALID];
+  // 档位
+  optional GearPosition gear = 36 [default = GEAR_INVALID];
+  // 档位Number
+  optional int32 gear_number = 37 [default = 0];
+  // 转向拨杆信号
+  optional SignalTurningIndicator signal_turning_indicator = 38 [default = TURNING_INDICATOR_INVALID];
+  // 转向灯信号, 0x0:无效，0x1:OFF, 0x2:右转向灯开，0x3:左转向灯开，0x4:紧急告警灯开
+  optional SignalTurnLamp signal_turn_lamp = 39 [default = TURN_LAMP_INVALID];
+  // 制动灯信号, 0x0:无效，0x1:OFF, 0x2:开
+  optional SignalLamp signal_brake_lamp = 40 [default = LAMP_INVALID];
+  // 制动踏板深度, PH=[百分比][0,100], 小于0无效
+  optional int32 brake_pedal_value = 41 [default  = 0];
+  // 油门踏板深度, PH=[百分比][0,100], 小于0无效
+  optional int32 acc_pedal_value = 42 [default  = 0];
+
+  // 发动机转速有效位
+  optional bool engine_speed_valid = 43 [default = false];
+  // 发动机转速
+  optional float engine_speed = 44 [default  = 0];
+  // 发动机转矩有效位
+  optional bool engine_torque_valid = 45 [default = false];
+  // 发动机转矩(N.m)
+  optional float engine_torque = 46 [default  = 0];
+}
+

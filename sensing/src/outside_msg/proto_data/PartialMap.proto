@@ -1,0 +1,62 @@
+syntax = "proto3";
+package PartialMap;
+option optimize_for = LITE_RUNTIME;
+
+message Coordinate
+{
+	double m_x = 1;
+	double m_y = 2;
+	double m_z = 3;
+};
+
+message PartialLine
+{
+	uint64 m_LineID = 1;
+	uint32 m_Index  = 2;
+	uint32 m_ElementSequence = 3;
+	repeated Coordinate m_Points = 4;
+};
+
+message PartialLane
+{
+	uint64 m_LaneID = 1;
+	uint64 m_LeftLines = 2;
+	uint64 m_RightLines = 3;
+
+	uint64 m_LeftLane = 4;
+	uint64 m_RightLane = 5;
+
+	double m_Length = 6;
+	double m_Offset = 7;
+
+	repeated uint64 m_NextLane = 8;
+	repeated uint64 m_PreLane  = 9;
+	repeated Coordinate m_CenterLine = 10;
+};
+
+message GroupLaneItem
+{
+	repeated uint64 m_CurLanes = 1;
+	repeated uint64 m_LeftLanes = 2;
+	repeated uint64 m_RightLanes = 3;
+};
+
+message VehiclePosition
+{
+	uint64 m_TimeStamp   = 1;
+	uint64 m_DatumStamp  = 2;
+	uint64 m_LastTimeStamp = 3;
+	Coordinate m_VehiclePosition = 4;
+	Coordinate m_RelativeVehiclePosition = 5;
+};
+
+message PartialMap
+{
+	VehiclePosition m_Position = 1;
+	uint64 m_DatumStamp = 2;
+	uint64 m_CurLaneId  = 3;
+	repeated PartialLane m_Lanes = 4;
+	repeated PartialLine m_Lines = 5;
+	repeated GroupLaneItem m_Group = 6;
+};
+

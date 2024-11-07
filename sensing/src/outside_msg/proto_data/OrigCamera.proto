@@ -1,0 +1,53 @@
+syntax = "proto3";
+package OrigCamera;
+option optimize_for = LITE_RUNTIME;
+
+enum CameraLineType 
+{
+	BACKGROUND            = 0;    
+	SINGLE_SOLIDWHITE     = 1;    
+	SINGLE_DASHEDWHITE    = 2;    
+	SINGLE_SOLIDYELLOW    = 3;    
+	SINGLE_DASHEDYELLOW   = 4;    
+	DOUBLE_SOLIDYELLOW    = 5;    
+	DASHED_SOLID          = 6;    
+	SOLID_DASHED          = 7;    
+	DECELERATION_STRIP      = 8;    
+	BOLD                    = 9;    
+	ROUDEDGE                = 10;    
+	BOTT_DOTS               = 11;    
+	BARRIER                 = 12;    
+	INVALID                 = 0x0F;
+};
+
+enum CameraLaneDirect
+{
+	LANE_DIRET_STRAIGHT = 0;
+	LANE_DIRET_LEFT     = 1;
+	LANE_DIRET_RIGHT    = 2;
+};
+
+message CameraLineItem
+{
+	uint32 m_uCameraLaneID8              =1;
+        CameraLineType m_eCameraLaneType     =2;
+        uint32 m_uCameraCurveRadius16        =3;
+        double m_fCameraLaneCurvature0       =4;
+        float m_fCameraLaneHeadingAngle      =5;
+        float m_fCameraLaneProbOfExist       =6;
+        CameraLaneDirect m_eCameraLaneCurvDiret =7;
+        double m_fCameraLaneCurvature1          =8;
+        double m_fCameraLaneCurvature2          =9;
+        double m_fCameraLaneCurvature3          =10;
+};
+
+message CameraLaneSection
+{
+	uint64 m_uTimeStamp                 =1;
+	CameraLineItem m_LeftLineItem       =2;
+	CameraLineItem m_RightLineItem      =3;
+	CameraLineItem m_LeftLeftLineItem   =4;
+	CameraLineItem m_RightRightItem     =5;
+};
+
+

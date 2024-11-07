@@ -1,0 +1,21 @@
+syntax = "proto3";
+package FitMapLine;
+option optimize_for = LITE_RUNTIME;
+
+message FitCurveSegment
+{
+	float f_seg_offset = 1;
+	float f_seg_s = 2;
+	float f_seg_e = 3;
+	float f_scale = 4;
+	float f_seg_x_s = 5;
+	float f_seg_y_s = 6;
+	repeated double f_coefficient_x = 7;
+	repeated double f_coefficient_y = 8;
+};
+
+message FitCurve
+{
+	uint64   u_timestamp = 1;
+	repeated FitCurveSegment fit_curves = 2;
+};

@@ -1,0 +1,101 @@
+syntax = "proto2";
+
+package phoenix.msg.control;
+
+import "header.proto";
+
+message ChassisCtlCmd {
+
+  enum GearPosition {
+    GEAR_INVALID = 0;
+    GEAR_P = 1;
+    GEAR_N = 2;
+    GEAR_R = 3;
+    GEAR_D = 4;
+  };
+
+  enum SignalLamp{
+    LAMP_INVALID = 0;
+    LAMP_OFF = 1;
+    LAMP_ON = 2;
+  };
+
+  enum SignalTurnLamp {
+    TURN_LAMP_INVALID = 0;
+    TURN_LAMP_OFF = 1;
+    TURN_LAMP_LEFT = 2;
+    TURN_LAMP_RIGHT = 3;
+    TURN_LAMP_EMERGENCY = 4;
+  };
+
+  enum EpbStatus {
+    EPB_STATUS_INVALID = 0;
+    EPB_STATUS_OFF = 1;
+    EPB_STATUS_ON = 2;
+  };
+
+  enum WiperStatus {
+    WIPER_INVALID = 0;
+    WIPER_OFF = 1;
+    WIPER_SHORT_PRESS_WITH_CLICK = 2;
+    WIPER_LONG_PRESS_WITH_CLICK = 3;
+    WIPER_INT_1 = 4;
+    WIPER_INT_2 = 5;
+    WIPER_INT_3 = 6;
+    WIPER_INT_4 = 7;
+    WIPER_LO = 8;
+    WIPER_HI = 9;
+  };
+
+  // Header
+  optional common.Header header = 1;
+
+  // 开始自动驾驶命令, 0 ~ 无请求, 1 ~ 关闭, 2 ~ 开启
+  optional int32 start_robotic_ctl = 2 [default = 0];
+  // 使能转向控制系统
+  optional bool enable_eps = 3 [default = false];
+  // 使能油门控制系统
+  optional bool enable_throttle_sys = 4 [default  = false];
+  // 使能制动控制系统
+  optional bool enable_ebs = 5 [default = false];
+
+  /// 使能远程控制
+  optional bool enable_remote_ctl = 6 [default = false];
+  // 使能直接控制模式
+  optional bool enable_direct_ctl = 7 [default = false];
+  /// 使能速度控制
+  optional bool enable_acc = 8 [default = false];
+  /// 释放油门控制
+  optional bool release_throttle = 9 [default = false];
+
+  // 方向盘角度(rad)
+  optional float steering_wheel_angle = 10 [default = 0];
+  // 方向盘角速度(rad/s)
+  optional float steering_wheel_speed = 11 [default  = 0];
+  // 方向盘扭矩(Nm)
+  optional float steering_wheel_torque = 12 [default  = 0];
+  // 速度(m/s)
+  optional float velocity = 13 [default = 0];
+  // 加速度(m/s2)
+  optional float acceleration = 14 [default  = 0];
+  // 加速度量
+  optional float acc_value = 15 [default = 0];
+  // 刹车量
+  optional float brake_value = 16 [default  = 0];
+
+  // 档位
+  optional GearPosition gear = 17 [default = GEAR_INVALID];
+
+  // 转向灯信号, 0x0:无效，0x1:OFF, 0x2:右转向灯开，0x3:左转向灯开，0x4:紧急告警灯开
+  optional SignalTurnLamp turn_lamp = 18 [default = TURN_LAMP_INVALID];
+  // 制动灯信号, 0x0:无效，0x1:OFF, 0x2:开
+  optional SignalLamp brake_lamp = 19 [default = LAMP_INVALID];
+
+  // 雨刮器状态, 0x0:无效，0x1:关闭, 0x2:SHORT PRESS WITH CLICK,0x3:LONG PRESS WITH CLICK，0x4:INT 1, 0x5:INT 2，0x6:INT 3, 0x7:INT 4，0x8:LO，0x9:HI
+  optional WiperStatus wiper = 20 [default = WIPER_INVALID];
+
+  // 驻车系统状态, 0x0:无效，0x1:驻车解除, 0x2:驻车中
+  optional EpbStatus epb_status = 21 [default = EPB_STATUS_INVALID];
+}
+
+

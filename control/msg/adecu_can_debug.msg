@@ -1,0 +1,8 @@
+uint32 adecu_debug_ad_mode
+uint32 adecu_debug_tar_vel_set
+uint32 adecu_debug_tar_trajectory_type
+uint32 adecu_debug_tar_vel_type
+float64 adecu_debug_vel_obj_dist
+float64 adecu_debug_vel_obj_vel
+float64 adecu_debug_planning_send_vel
+float64 adecu_debug_planning_send_ax

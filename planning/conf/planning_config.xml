@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config>
+
+  <!-- 配置位姿模块 -->
+  <pos_filter>
+
+    <!-- 相机车道线 -->
+    <cam_lane>
+      <!-- x向偏移 m -->
+      <x_offset>0.0</x_offset>
+      <!-- y向偏移 m -->
+      <y_offset>0.0</y_offset>
+      <!-- 航向角偏移 deg -->
+      <h_offset>0.00</h_offset>
+    </cam_lane>
+
+  </pos_filter>
+
+
+  <!-- 配置障碍物过滤模块 -->
+  <obj_filter>
+
+    <!-- 是否使用外部障碍物列表 -->
+    <using_outside_obj_list>1</using_outside_obj_list>
+
+    <!-- 激光雷达 -->
+    <lidar_usage>0</lidar_usage>
+
+  </obj_filter>
+
+
+  <!-- 配置驾驶地图模块 -->
+  <driving_map>
+
+    <!-- 使用的地图类型： 0 - camera, 1 - hdmap, 2 - mixed -->
+    <inputted_map_type>2</inputted_map_type>
+
+  </driving_map>
+
+  <!-- 配置行为规划模块 -->
+  <action_planning>
+
+    <!-- 是否允许自主变道 -->
+    <enable_auto_changing_lane>1</enable_auto_changing_lane>
+    <!-- 是否允许强制变道 -->
+    <enable_action_planning_force_changing_lane>1</enable_action_planning_force_changing_lane>
+
+  </action_planning>
+
+  <!-- 配置轨迹规划模块 -->
+  <trajectory_planning>
+
+    <!-- 是否允许变道 -->
+    <enable_changing_lane>1</enable_changing_lane>
+    <!-- 是否允许车道内避让 -->
+    <enable_avoiding_collision_in_lane>1</enable_avoiding_collision_in_lane>
+    <!-- 是否允许跨线避让 -->
+    <enable_avoiding_collision_over_line>1</enable_avoiding_collision_over_line>
+    <!-- 是否允许强制变道 -->
+    <enable_trajectory_planning_force_changing_lane>1</enable_trajectory_planning_force_changing_lane>
+
+  </trajectory_planning>
+
+  <!-- 配置速度规划模块 -->
+  <velocity_planning>
+
+    <!-- 使能AEB预减速的功能 -->
+    <enable_aeb_pre_dec>false</enable_aeb_pre_dec>
+
+    <!-- 到静态障碍物的安全距离 (m) -->
+    <safe_dist_to_static_obj>8.0</safe_dist_to_static_obj>
+    <!-- 低速跟随的安全距离 (m) -->
+    <safe_dist_for_low_speed_following>8.0</safe_dist_for_low_speed_following>
+    <!-- 到动态障碍物的安全距离 (m) -->
+    <safe_dist_to_dynamic_obj>8.0</safe_dist_to_dynamic_obj>
+    <!-- 倒车时，到障碍物的安全距离 (m) -->
+    <safe_distance_in_backing_mode>2.0</safe_distance_in_backing_mode>
+
+    <!-- 精准停车 -->
+    <stop_accurately>
+      <!-- 使能 -->
+      <enable>true</enable>
+      <!-- 制动距离 (m) -->
+      <braking_distance>0.6</braking_distance>
+      <!-- 建议的减速度 (m/s^2) -->
+      <proposed_decelaration>3.0</proposed_decelaration>
+    </stop_accurately>
+
+    <!-- 侧向加速度限制 (m/s^2) -->
+    <lat_acc_limit>1.0</lat_acc_limit>
+
+    <!-- 非地图模式下红绿灯停车使能 -->
+    <enable_stop_by_traffic_light>false</enable_stop_by_traffic_light>
+
+  </velocity_planning>
+
+
+</config>

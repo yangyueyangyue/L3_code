@@ -1,0 +1,110 @@
+syntax = "proto2";
+
+package phoenix.msg.perception;
+
+import "header.proto";
+
+message ObstacleRadar {
+  // 障碍物类型
+  enum ObjType {
+    // 未知
+    OBJ_TYPE_UNKNOWN = 0;
+    // 乘用车           
+    OBJ_TYPE_PASSENGER_VEHICLE = 1;
+    // 商用车     
+    OBJ_TYPE_COMMERCIAL_VEHICLE = 2;
+    // 特殊车    
+    OBJ_TYPE_SPECIAL_VEHICLE = 3;
+    // 未知类型机动车      
+    OBJ_TYPE_OTHER_VEHICLE = 4;
+    // 行人         
+    OBJ_TYPE_PEDESTRIAN = 5;
+    // 非机动车(骑行者) 
+    OBJ_TYPE_BICYCLE = 6;
+    // 动物               
+    OBJ_TYPE_ANIMAL = 7;
+    // 遗撒物              
+    OBJ_TYPE_DISCARD = 8;
+    // 路沿
+    OBJ_TYPE_CURB = 9;
+  };
+  // 障碍物跟踪的状态
+  enum TrackStatus {
+    TRACK_STATUS_NO_TARGET = 0;
+    TRACK_STATUS_NEW_TARGET = 1;
+    TRACK_STATUS_NEW_UPDATED_TARGET = 2;
+    TRACK_STATUS_UPDATED_TARGET = 3;
+    TRACK_STATUS_COASTED_TARGET = 4;
+    TRACK_STATUS_MERGED_TARGET = 5;
+    TRACK_STATUS_INVALID_COASTED_TARGET = 6;
+    TRACK_STATUS_NEW_COASTED_TARGET = 7;
+  };
+  // 障碍物融合的类型
+  enum MergedStatus {
+    MERGED_STATUS_NO_TARGET = 0;
+    MERGED_STATUS_MR_TARGET = 1;
+    MERGED_STATUS_LR_TARGET = 2;
+    MERGED_STATUS_MR_LR_TARGET = 3;
+  };
+
+  // 障碍物ID
+  optional int32 id = 1 [default = 0];
+  // 障碍物的类型
+  optional ObjType type = 2 [default = OBJ_TYPE_UNKNOWN];
+  // 障碍物跟踪的状态
+  optional TrackStatus track_status = 3 [default = TRACK_STATUS_NO_TARGET];
+  // 障碍物融合的类型
+  optional MergedStatus merged_status = 4 [default = MERGED_STATUS_NO_TARGET];
+  // 障碍物是否是迎面驶来的
+  optional bool oncomming = 5 [default = false];
+  // 此障碍物是否是bridge
+  optional bool bridge = 6 [default = false];
+  // 障碍物距离传感器的距离（极坐标）(m)
+  optional float range = 7 [default = 0];
+  // 障碍物与传感器中心纵轴之间的角度（极坐标）(rad)
+  optional float angle = 8 [default = 0];
+  // 障碍物距离传感器的距离的变化率（极坐标）(m/sec)
+  optional float range_rate = 9 [default = 0];
+  // 障碍物距离传感器的距离变化率的变化率（极坐标）(m/sec^2)
+  optional float range_acceleration = 10 [default = 0];
+  // 障碍物的侧向速度（左正右负）(m/sec)
+  optional float lateral_rate = 11 [default = 0];
+  // 障碍宽度 (m)
+  optional float width = 12 [default = 0];
+  // 障碍物位置x坐标 (m)
+  optional float x = 13 [default = 0];
+  // 障碍物位置y坐标 (m)
+  optional float y = 14 [default = 0];
+  // 障碍物的x向速度 (m/sec)
+  optional float v_x = 15 [default = 0];
+  // 障碍物的y向速度 (m/sec)
+  optional float v_y = 16 [default = 0];
+  // 障碍物的x向加速度 (m/sec^2)
+  optional float accel_x = 17 [default = 0];
+  // 障碍物的y向加速度 (m/sec^2)
+  optional float accel_y = 18 [default = 0];
+  // 障碍物的角速度 (rad/sec)
+  optional float yaw_rate = 19 [default = 0];
+}
+
+message ObstacleRadarList {
+  // 雷达类型定义
+  enum RadarType {
+    RADAR_TYPE_UNKNOWN = 0;
+    RADAR_TYPE_ESR = 1;
+    RADAR_TYPE_SRR2 = 2;
+    RADAR_TYPE_RR51W = 3;
+    RADAR_TYPE_ARS430 = 4;
+  };
+
+  // 报文头
+  optional common.Header header = 1;
+  // 雷达类型
+  optional RadarType radar_type = 2 [default = RADAR_TYPE_UNKNOWN];
+  // 障碍物的数量
+  optional int32 obstacles_num = 3 [default = 0];
+  // 障碍物列表
+  repeated ObstacleRadar obstacles = 4;
+}
+
+

@@ -1,0 +1,333 @@
+syntax = "proto3";
+package phoenix.ad_data_upload;
+option optimize_for = LITE_RUNTIME;
+message MsgHead_message
+{
+	    	bool	vaild = 1;
+				uint32	sequence = 2;
+				sint64	timestamp = 3;
+				sint32	time_offset = 4;
+				uint32	src_module_id = 5;
+				uint32	dst_module_id = 6;
+};
+message Vec2d_message
+{
+				repeated float	vec_ = 1;
+};
+message PathPoint_message
+{
+				Vec2d_message	point = 1;
+				float	heading = 2;
+				float	curvature = 3;
+				float	s = 4;
+				float	l = 5;
+};
+message OBBox2d_message
+{
+				Vec2d_message	center_ = 1;
+				repeated Vec2d_message	unit_direction_ = 2;
+				Vec2d_message	extents_ = 3;
+};
+message ByPassingReq_message
+{
+	    	bool	allow_turning_left = 1;
+	    	bool	allow_turning_right = 2;
+};
+message EventChangingLaneReq_message
+{
+				sint32	id = 1;
+				sint32	request_ = 2;
+				sint32	sequence_ = 3;
+	    	bool	allow_auto_changing_to_left_ = 4;
+	    	bool	allow_auto_changing_to_right_ = 5;
+};
+message ActionPlanningResult_message
+{
+				MsgHead_message	msg_head = 1;
+	    	bool	enable_adas = 2;
+	    	bool	enable_aeb = 3;
+	    	bool	enable_acc = 4;
+	    	bool	enable_lka = 5;
+	    	bool	enable_alc = 6;
+	    	bool	enable_isl = 7;
+	    	bool	enable_ngp = 8;
+				float	v_setting = 9;
+				float	a_setting = 10;
+				float	time_gap_setting = 11;
+				sint32	driving_mode = 12;
+				sint32	gear = 13;
+				sint32	turn_lamp = 14;
+				ByPassingReq_message	bypassing_req = 15;
+				EventChangingLaneReq_message	event_changing_lane_req = 16;
+};
+message point_message
+{
+				float	x = 1;
+				float	y = 2;
+				float	heading = 3;
+				float	curvature = 4;
+				float	s = 5;
+};
+message TarTrj_message
+{
+				sint64	timestamp = 1;
+				Pos_message	curr_pos = 2;
+				Pos_message	leading_pos = 3;
+				Lat_Err_message	lat_err = 4;
+				uint32	trj_direction = 5;
+				sint32	points_num = 6;
+				repeated point_message	points = 7;
+};
+message PlanningResult_message
+{
+				MsgHead_message	msg_head = 1;
+				sint32	cur_status = 2;
+				sint32	tar_driving_mode = 3;
+				sint32	enable_eps = 4;
+				sint32	enable_throttle_sys = 5;
+				sint32	enable_ebs = 6;
+				sint32	hold_steering_wheel = 7;
+				sint32	release_throttle = 8;
+				sint32	tar_gear = 9;
+				sint32	tar_turn_lamp = 10;
+				sint32	tar_brake_lamp = 11;
+				float	tar_v = 12;
+				float	tar_a = 13;
+				TarTrj_message	tar_trj = 14;
+};
+message TarPos_message
+{
+				float	x = 1;
+				float	y = 2;
+				float	heading = 3;
+				float	s = 4;
+};
+message TarObj_message
+{
+	    	bool	valid = 1;
+				sint32	obj_dec_status = 2;
+				float	dist_to_obj = 3;
+				float	time_gap = 4;
+				float	relative_v = 5;
+				float	ttc = 6;
+				float	obj_v = 7;
+				sint32	dist_gap_level = 8;
+				sint32	rel_spd_level = 9;
+};
+message VelocityPlanningResult_message
+{
+				MsgHead_message	msg_head = 1;
+				sint32	tar_type = 2;
+				float	tar_v = 3;
+				float	tar_a = 4;
+				TarPos_message	tar_pos = 5;
+	    	bool	release_throttle = 6;
+	    	bool	aeb_warning = 7;
+	    	bool	aeb_action = 8;
+				TarObj_message	tar_obj = 9;
+};
+message ReferenceLineInfo_message
+{
+				uint32	curve_count = 1;
+				repeated PathPoint_message	curve = 2;
+				uint32	smooth_curve_count = 3;
+				repeated PathPoint_message	smooth_curve = 4;
+};
+message TrajectoryPoint_message
+{
+				PathPoint_message	path_point_info = 1;
+				float	v = 2;
+				float	a = 3;
+				float	yaw_rate = 4;
+				float	relative_time = 5;
+};
+message ObjInfo_message
+{
+				sint32	obj_list_index = 1;
+				sint32	risk_value = 2;
+				float	dynamic_distance = 3;
+				float	static_distance = 4;
+				float	obj_s_ref = 5;
+				float	obj_l_ref = 6;
+				float	collision_s = 7;
+				TrajectoryPoint_message	obj_traj_point = 8;
+};
+message FollowingTarget_message
+{
+	    	bool	valid = 1;
+				float	obj_x = 2;
+				float	obj_y = 3;
+};
+message DrivingMapInfo_2_message
+{
+				MsgHead_message	msg_head = 1;
+				PathPoint_message	nearest_point_to_veh_on_lane = 2;
+				sint32	current_reference_line_index = 3;
+				uint32	reference_lines_count = 4;
+				repeated ReferenceLineInfo_message	reference_lines = 5;
+				uint32	risky_obj_list_count = 6;
+				repeated ObjInfo_message	risky_obj_list = 7;
+				uint32	uncertain_list_count = 8;
+				repeated ObjInfo_message	uncertain_list = 9;
+				FollowingTarget_message	following_target = 10;
+};
+message Behavior_Planning_Result_message
+{
+				ActionPlanningResult_message	action_planning_result = 1;
+};
+message Decision_Planning_Result_message
+{
+				PlanningResult_message	planning_result = 1;
+};
+message Speed_Planning_Result_message
+{
+				VelocityPlanningResult_message	velocity_planning_result = 1;
+};
+message DrivingMapInfo2_message
+{
+				DrivingMapInfo_2_message	driving_map_info_2 = 1;
+};
+message Spd_Pln_Display_Data_message
+{
+				Behavior_Planning_Result_message	behavior_planning_result_info = 1;
+				Decision_Planning_Result_message	decision_planning_result_info = 2;
+				Speed_Planning_Result_message	speed_planning_result_info = 3;
+				DrivingMapInfo2_message	driving_map_info_2 = 4;
+};
+message Pos_message
+{
+				float	x = 1;
+				float	y = 2;
+				float	heading = 3;
+				float	curvature = 4;
+				float	s = 5;
+				float	l = 6;
+};
+message Sample_message
+{
+				float	lat_err = 1;
+				float	lat_err_chg_rate = 2;
+				float	yaw_err = 3;
+				float	yaw_err_chg_rate = 4;
+};
+message Lat_Err_message
+{
+				sint32	moving_flag = 1;
+				repeated Sample_message	samples = 2;
+};
+message EventChangingLaneRsp_message
+{
+				sint32	id = 1;
+				sint32	response_ = 2;
+				sint32	requset_sequence_ = 3;
+				sint32	status_ = 4;
+};
+message Trj_Change_message
+{
+	    	bool	is_changing = 1;
+				float	lat_offset = 2;
+				uint32	changed_trajectory_count = 3;
+				repeated PathPoint_message	changed_trajectory = 4;
+};
+message TrajectoryPlanningResult_message
+{
+				MsgHead_message	msg_head = 1;
+				Pos_message	curr_pos = 2;
+				Pos_message	leading_pos = 3;
+				Lat_Err_message	lat_err = 4;
+				sint32	trj_direction = 5;
+				uint32	target_trajectory_sample_points_count = 6;
+				repeated PathPoint_message	target_trajectory_sample_points = 7;
+				Trj_Change_message	trj_changing = 8;
+	    	bool	hold_steering_wheel = 9;
+				EventChangingLaneReq_message	changing_lane_req = 10;
+				EventChangingLaneRsp_message	changing_lane_rsp = 11;
+};
+message BoundaryAssociation_message
+{
+				float	s = 1;
+				float	width = 2;
+				sint32	type = 3;
+				Vec2d_message	point = 4;
+};
+message Boundary_message
+{
+				uint32	curve_count = 1;
+				repeated BoundaryAssociation_message	curve = 2;
+};
+message ID_message
+{
+				sint32	id = 1;
+};
+message LaneInfo_message
+{
+				ID_message	lane_id = 1;
+				sint32	lane_index = 2;
+				sint32	quality = 3;
+				uint32	central_curve_count = 4;
+				repeated Vec2d_message	central_curve = 5;
+				Boundary_message	left_boundary = 6;
+				Boundary_message	right_boundary = 7;
+};
+message LineSegment2d_message
+{
+				repeated Vec2d_message	points_ = 1;
+};
+message MapTrafficLight_message
+{
+				ID_message	id = 1;
+				LineSegment2d_message	stop_line = 2;
+};
+message MapInfo_message
+{
+				uint32	lane_table_count = 1;
+				repeated LaneInfo_message	lane_table = 2;
+				uint32	map_traffic_light_table_count = 3;
+				repeated MapTrafficLight_message	map_traffic_light_table = 4;
+};
+message RoadBoundary_message
+{
+				PathPoint_message	ref_point = 1;
+				PathPoint_message	left_boundary_point = 2;
+				PathPoint_message	right_boundary_point = 3;
+				float	left_width = 4;
+				float	right_width = 5;
+};
+message ObstacleInfo_message
+{
+				sint32	id = 1;
+				OBBox2d_message	obb = 2;
+				float	heading = 3;
+				sint32	type = 4;
+				sint32	dynamic = 5;
+	    	bool	ignore = 6;
+	    	bool	uncertain = 7;
+				float	V = 8;
+				float	s_ref = 9;
+				float	l_ref = 10;
+				uint32	pred_trajectory_count = 11;
+				repeated uint32	pred_trajectory_count_num = 12;
+				repeated TrajectoryPoint_message	pred_trajectory = 13;
+};
+message DrivingMapInfo_1_message
+{
+				MsgHead_message	msg_head = 1;
+				MapInfo_message	map = 2;
+				uint32	road_boundary_count = 3;
+				repeated RoadBoundary_message	road_boundary = 4;
+				uint32	obstacle_list_count = 5;
+				repeated ObstacleInfo_message	obstacle_list = 6;
+};
+message Trajectory_Planning_Result_message
+{
+				TrajectoryPlanningResult_message	Trajectory_planning_result = 1;
+};
+message DrivingMap_message
+{
+				DrivingMapInfo_1_message	driving_map_info_1 = 1;
+};
+message PathPln_Display_Data_message
+{
+				Trajectory_Planning_Result_message	traj_planning_result = 1;
+				DrivingMap_message	driving_map = 2;
+};

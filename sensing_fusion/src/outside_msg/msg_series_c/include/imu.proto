@@ -1,0 +1,21 @@
+syntax = "proto2";
+
+package phoenix.msg.localization;
+
+import "header.proto";
+
+message Imu {
+  optional common.Header header = 1;    // 报文头
+  optional float yaw_rate =2;           // 绕车身Z轴的角速度(偏航角)，弧度/秒
+  optional float pitch_rate =3;         // 绕车身Y轴的角速度(俯仰角)，弧度/秒
+  optional float roll_rate =4; 		// 绕车身X轴的角速度(横滚角)，弧度/秒
+  optional float accel_x = 5;           // 沿着车身X轴的加速度，米/秒^2
+  optional float accel_y = 6;           // 沿着车身Y轴的加速度，米/秒^2
+  optional float accel_z = 7;           // 沿着车身Z轴的加速度，米/秒^2
+  /**
+   *  使用车身坐标系:
+   *      车身纵轴向前为X轴正方向,车身横轴向左为Y轴正方向，车身向上为Z轴正方向;
+   *      角度方向逆时针为正.
+   */
+}
+

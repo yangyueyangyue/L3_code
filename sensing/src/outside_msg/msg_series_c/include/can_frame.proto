@@ -1,0 +1,75 @@
+syntax = "proto2";
+
+package phoenix.can_dev.perception;
+
+message CanFrame {
+  // 时间戳
+  optional int64 time_stamp = 1;
+
+  // 报文 ID,标准帧为 11 位,扩展帧为 29 位;
+  optional uint32 id = 2;
+  // 1-远程帧, 0-数据帧
+  optional uint32 RTR = 3;
+  // 1-扩展帧, 0-标准帧
+  optional uint32 EXT = 4;
+  // 报文数据长度, 取值如下:
+  // CAN 报文: 0~8;
+  optional int32 data_len = 5;
+  // 报文数据
+  // CAN: 报文数据长度为 8 字节
+  optional uint32 data_1 = 6 [default = 0];
+  optional uint32 data_2 = 7 [default = 0];
+}
+
+message CanFrameList {
+  // CAN帧数量
+  optional uint32 can_frame_num = 1 [default = 0];
+  // CAN帧列表
+  repeated CanFrame can_frame_list = 2;
+}
+
+message CanFdFrame {
+  // 时间戳
+  optional int64 time_stamp = 1;
+
+  // 报文 ID,标准帧为 11 位,扩展帧为 29 位;
+  optional uint32 id = 2 [default = 0];
+  // 1-CANFD, 0-CAN
+  optional uint32 FD = 3 [default = 0];
+  // 1-远程帧, 0-数据帧, RTR位在FD位为 1 时,不允许设置为 1;
+  optional uint32 RTR = 4 [default = 0];
+  // 1-扩展帧, 0-标准帧
+  optional uint32 EXT = 5 [default = 0];
+  // 1-CANFD 加速, 0-不加速, BRS 位在 FD 为 1 时有效
+  optional uint32 BRS = 6 [default = 0];
+  // 1-被动错误, 0-主动错误, ESI 仅 CANFD 接收有效
+  optional uint32 ESI = 7 [default = 0];
+  // 报文数据长度, 取值如下:
+  // CAN 报文: 0~8; CANFD 报文: 0~8,12,16,20,24,32,48,64
+  optional int32 data_len = 8 [default = 0];
+  // 报文数据
+  // CAN: 报文数据长度为 8 字节; CAN FD : 报文数据长度 64 字节;
+  optional uint32 data_1 = 9 [default = 0];
+  optional uint32 data_2 = 10 [default = 0];
+  optional uint32 data_3 = 11 [default = 0];
+  optional uint32 data_4 = 12 [default = 0];
+  optional uint32 data_5 = 13 [default = 0];
+  optional uint32 data_6 = 14 [default = 0];
+  optional uint32 data_7 = 15 [default = 0];
+  optional uint32 data_8 = 16 [default = 0];
+  optional uint32 data_9 = 17 [default = 0];
+  optional uint32 data_10 = 18 [default = 0];
+  optional uint32 data_11 = 19 [default = 0];
+  optional uint32 data_12 = 20 [default = 0];
+  optional uint32 data_13 = 21 [default = 0];
+  optional uint32 data_14 = 22 [default = 0];
+  optional uint32 data_15 = 23 [default = 0];
+  optional uint32 data_16 = 24 [default = 0];
+}
+
+message CanFdFrameList {
+  // CANFD帧数量
+  optional uint32 canfd_frame_num = 1 [default = 0];
+  // CANFD帧列表
+  repeated CanFdFrame canfd_frame_list = 2;
+}

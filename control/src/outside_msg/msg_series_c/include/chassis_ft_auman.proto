@@ -1,0 +1,15 @@
+syntax = "proto2";
+
+package phoenix.msg.control;
+
+
+message ChassisFtAuman {
+  // TJA功能开关, 0 ~ OFF, 1 ~ ON
+  optional int32 switch_tja = 1 [default = 0];
+  // HWA功能开关, 0 ~ OFF, 1 ~ ON
+  optional int32 switch_hwa = 2 [default = 0];
+  // I-Drive功能开关, 0 ~ OFF, 1 ~ ON
+  optional int32 switch_i_drive = 3 [default = 0];
+}
+
+

@@ -1,0 +1,45 @@
+syntax = "proto2";
+
+import "header.proto";
+
+package phoenix.msg.perception;
+
+
+// 交通标志的位置及尺寸
+message TrafficSignalBox {
+  optional float x = 1 [default = 0];
+  optional float y = 2 [default = 0];
+  optional float z = 3 [default = 0];
+  optional float width = 4 [default = 0];
+  optional float height = 5 [default = 0];
+  optional int32 camera_id = 6 [default = 0];
+}
+
+// 限速标志
+message TrafficSignalSpeedRestriction {
+  enum Type {
+    UNKNOWN = 0;
+    START_RESTRICTION = 1;
+    END_RESTRICTION = 2;
+  };
+
+  // Traffic signal string-ID in the map data.
+  optional string id = 1;
+  // 限速标志类型
+  optional Type type = 2 [default = UNKNOWN];
+  // 位置及尺寸
+  optional TrafficSignalBox box = 3;
+  // 限速值 (m/s)
+  optional float speed = 4 [default = 0];
+}
+
+// 交通标志列表
+message TrafficSignalList {
+  // 报文头
+  optional common.Header header = 1;
+
+  // 限速标志列表                         
+  repeated TrafficSignalSpeedRestriction speed_restrictions = 2;                  
+}
+
+

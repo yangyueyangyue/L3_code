@@ -1,0 +1,19 @@
+SIMFILE
+FILEBASE E:\Software\Trucksim2016.2_data\Runs\Run_935432b7-ed89-4c92-993d-0ec6b0e5eb1a
+INPUT E:\Software\Trucksim2016.2_data\Runs\Run_935432b7-ed89-4c92-993d-0ec6b0e5eb1a_all.par
+ECHO E:\Software\Trucksim2016.2_data\Runs\Run_935432b7-ed89-4c92-993d-0ec6b0e5eb1a_echo.par
+FINAL E:\Software\Trucksim2016.2_data\Runs\Run_935432b7-ed89-4c92-993d-0ec6b0e5eb1a_end.par
+LOGFILE E:\Software\Trucksim2016.2_data\Runs\Run_935432b7-ed89-4c92-993d-0ec6b0e5eb1a_log.txt
+ERDFILE E:\Software\Trucksim2016.2_data\Runs\Run_935432b7-ed89-4c92-993d-0ec6b0e5eb1a.erd
+ANIFILE E:\Software\Trucksim2016.2_data\runs\animator.par
+PROGDIR E:\Software\Trucksim2016.1_Prog\
+RESOURCEDIR E:\Software\Trucksim2016.1_Prog\Resources\
+DATADIR E:\Software\Trucksim2016.2_data\
+GUI_REFRESH_V TruckSim_RefreshEvent_3068
+PRODUCT_ID TruckSim
+PRODUCT_VER 2016.1
+VEHICLE_CODE s_ss__sss
+EXT_MODEL_STEP 0.0100
+PORTS_IMP 3,1,12,1
+PORTS_EXP 9,1,1,1,12,1,1,1,1,1
+END

@@ -1,0 +1,67 @@
+syntax = "proto2";
+
+package phoenix.msg.control;
+
+import "header.proto";
+import "chassis_ft_auman.proto";
+
+
+message SpecialChassisInfo {
+  // Header
+  optional common.Header header = 1;
+
+  // 开始自动驾驶命令, 0 ~ 无效值, 1 ~ 退出自动驾驶, 2 ~ 进入自动驾驶
+  optional int32 start_adas = 2 [default = 0];
+
+  /// LKA功能:  0 ~ 无效, 1 ~ 关闭, 2 ~ 开启
+  optional int32 enable_lka = 3 [default = 0];
+  /// ACC功能:  0 ~ 无效, 1 ~ 关闭, 2 ~ 开启
+  optional int32 enable_acc = 4 [default = 0];
+  /// AEB功能:  0 ~ 无效, 1 ~ 关闭, 2 ~ 开启
+  optional int32 enable_aeb = 5 [default = 0];
+  /// 变道功能:  0 ~ 无效, 1 ~ 关闭, 2 ~ 开启
+  optional int32 enable_alc = 6 [default = 0];
+  /// 智能限速功能:  0 ~ 无效, 1 ~ 关闭, 2 ~ 开启
+  optional int32 enable_isl = 7 [default = 0];
+  /// Navigation Guided Pilot: 0 ~ 无效, 1 ~ 关闭, 2 ~ 开启
+  optional int32 enable_ngp = 8 [default = 0];
+
+  /// 目标车速[m/s]
+  optional bool target_velocity_valid = 9 [default = false];
+  optional double target_velocity = 10 [default = 0];
+  /// 加速度[m/s^2]
+  optional bool target_acc_valid = 11 [default = false];
+  optional double target_acc = 12 [default = 0];
+  /// 时距[s]
+  optional bool target_time_gap_valid = 13 [default = false];
+  optional double target_time_gap = 14 [default = 0];
+
+  /// 变道请求, 0 - 无请求, 1 - 左变道, 2 - 右变道, 3 - 取消变道
+  optional int32 changing_lane_req = 15 [default = 0];
+
+  // CAN线连接状态：0 ~ 正常, 1 ~ 丢帧
+  optional int32 cnt_stu_frame_loss_can0 = 16 [default = 0];
+  optional int32 cnt_stu_frame_loss_can1 = 17 [default = 0];
+  optional int32 cnt_stu_frame_loss_can2 = 18 [default = 0];
+  optional int32 cnt_stu_frame_loss_can3 = 19 [default = 0];
+
+  // 网关和车身的CAN线连接状态：0 ~ 未连接, 1 ~ 已连接
+  optional int32 cnt_stu_gtw_to_veh_can0 = 20 [default = 0];
+  optional int32 cnt_stu_gtw_to_veh_can1 = 21 [default = 0];
+  optional int32 cnt_stu_gtw_to_veh_can2 = 22 [default = 0];
+  optional int32 cnt_stu_gtw_to_veh_can3 = 23 [default = 0];
+
+  // 控制侧和网关的CAN线连接状态：0 ~ 未连接, 1 ~ 已连接
+  optional int32 cnt_stu_ctl_to_gtw_can0 = 24 [default = 0];
+  optional int32 cnt_stu_ctl_to_gtw_can1 = 25 [default = 0];
+  optional int32 cnt_stu_ctl_to_gtw_can2 = 26 [default = 0];
+  optional int32 cnt_stu_ctl_to_gtw_can3 = 27 [default = 0];
+
+  // 网关和控制侧的连接状态: 0 ~ 未连接, 1 ~ 已连接
+  optional int32 cnt_stu_ctl_to_gtw = 28 [default = 0];
+
+  // 具体车型的特殊信息 (FT-Auman)
+  optional ChassisFtAuman ft_auman = 29;
+}
+
+

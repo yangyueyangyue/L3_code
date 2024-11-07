@@ -1,0 +1,170 @@
+#ifndef PERCEPTION_SENSORS_FUSION_SENSORS_MACROS_H_
+#define PERCEPTION_SENSORS_FUSION_SENSORS_MACROS_H_
+
+namespace phoenix{
+namespace perception{
+namespace sensorsfusion{
+
+/// 定义路沿曲线的最大值，定义为2
+#define MAX_LANE_CURB_NUM    (2)
+
+
+#define DISTANCE_BETWEEN_MAINCAM_AND_FRONTWHEEL    (1.2)  //前视一体机与前轴中心的纵向距离
+
+
+/**
+ * @struct SensorID
+ * @brief 传感器ID
+ */
+enum SensorID{
+    SENSOR_ID_INVALID = -1,
+
+    //前向主处理器
+    SENSOR_ID_MAIN_FORWARD_RADAR = 0,
+    SENSOR_ID_MAIN_FORWARD_CAM=1,
+    SENSOR_ID_MAIN_FORWARD_LIDAR,
+
+    //侧向毫米波
+    SENSOR_ID_LEFT_SIDE_RADAR,
+    SENSOR_ID_LEFT_BACKWARD_RADAR,
+    SENSOR_ID_RIGHT_SIDE_RADAR,
+    SENSOR_ID_RIGHT_BACKWARD_RADAR,
+
+    //视觉处理器
+    SENSOR_ID_CENTER_FORWARD_CAM,
+    SENSOR_ID_LEFT_SIDE_CAM,
+    SENSOR_ID_LEFT_BACKWARD_CAM=9,
+    SENSOR_ID_RIGHT_SIDE_CAM,
+    SENSOR_ID_RIGHT_BACKWARD_CAM=11,
+    SENSOR_ID_INSIDE_DMS_CAM,
+    SENSOR_ID_INSIDE_OMS_CAM,
+
+    SENSOR_ID_MAX
+};
+
+
+/**
+ * @struct SensorID
+ * @brief 传感器ID
+ */
+enum SensorPosition{
+  SENSOR_POSITION_NONE,
+  SENSOR_POSITION_MAIN_FRONT = 0x00000001,
+  SENSOR_POSITION_FRONT = (0x00000001 << 1),
+  SENSOR_POSITION_FRONT_LEFT = (0x00000001 << 2),
+  SENSOR_POSITION_FRONT_RIGHT = (0x00000001 << 3),
+  SENSOR_POSITION_REAR_LEFT = (0x00000001 << 4),
+  SENSOR_POSITION_REAR_RIGHT = (0x00000001 << 5),
+  SENSOR_POSITION_REAR = (0x00000001 << 6),
+
+  SENSOR_POSITION_LEFT = SENSOR_POSITION_FRONT_LEFT|SENSOR_POSITION_REAR_LEFT,
+  SENSOR_POSITION_RIGHT = SENSOR_POSITION_FRONT_RIGHT|SENSOR_POSITION_REAR_RIGHT
+};
+
+
+/**
+ * @struct SensorType
+ * @brief 传感器类型
+ */
+enum SensorType{
+    SENSOR_TYPE_UNKNOWN = -1,
+    SENSOR_TYPE_MAIN_FORWARD_CAMERA = 0,
+    SENSOR_TYPE_MAIN_FORWARD_RADAR,
+    SENSOR_TYPE_MAIN_FORWARD_LIDAR,
+};
+
+
+/**
+ * @struct TrackStatus
+ * @brief 跟踪状态
+ */
+enum TrackStatus{
+    TRACK_STATUS_INVALID = 0,
+    TRACK_STATUS_NEW,
+    TRACK_STATUS_NEW_UPDATED,
+    TRACK_STATUS_UPDATED,
+    TRACK_STATUS_MERGED,
+    TRACK_STATUS_MERGED_UPDATED,
+    TRACK_STATUS_HELD
+
+};
+
+//跟踪状态
+/**
+ * @struct
+ * @brief 定义最大跟踪轨迹点的数量
+ */
+enum { MAX_TRACKED_OBJS_TRJ_POINTS_NUM = 15 };
+
+/**
+ * @struct
+ * @brief 定义最大跟踪轨迹点的数量
+ */
+enum { MAX_TRACKED_OBJ_TRJ_POINT_NUM = 15 };
+enum { MAX_TRACKED_OBJ_NUM = 1024 };
+enum { MAX_OBJS_ASSOCIATION_NUM = 2048 };
+enum { MAX_TRACKED_OBJ_LIFE = 20 } ;//2
+enum { MAX_TRACKED_OBJ_MATCHED_NUM = 100} ;//设置为int32可以表示的最大值(0x7FFFFFFF - 2) 1000
+enum { MAX_TRACKED_OBJ_DURATION = MAX_TRACKED_OBJ_MATCHED_NUM };
+enum { MAX_PARTNER_NUM = 40 };
+
+/**
+ * @struct ListID
+ * @brief 定义列表标记类型
+ * 
+ */
+enum ListID{
+    LIST_ID_INVALID = -1,
+    LIST_ID_TRACKED = 0,
+    LIST_ID_MAIN_FORWARD_RADAR = 1,
+    LIST_ID_MAIN_FORWARD_CAM,
+    LIST_ID_MAIN_FORWARD_LIDAR,
+
+    //侧向毫米波
+    LIST_ID_LEFT_SIDE_RADAR,
+    LIST_ID_LEFT_BACKWARD_RADAR,
+    LIST_ID_RIGHT_SIDE_RADAR,
+    LIST_ID_RIGHT_BACKWARD_RADAR,
+
+    //视觉处理器
+    LIST_ID_CENTER_FORWARD_CAM,
+    LIST_ID_LEFT_SIDE_CAM,
+    LIST_ID_LEFT_BACKWARD_CAM,
+    LIST_ID_RIGHT_SIDE_CAM,
+    LIST_ID_RIGHT_BACKWARD_CAM,
+    LIST_ID_INSIDE_DMS_CAM,
+    LIST_ID_INSIDE_OMS_CAM,
+
+    LIST_ID_MAX
+};
+
+
+/**
+ * @struct
+ * @brief 匹配传感器数量
+ */
+enum {
+  SENSOR_REF_MAIN_FORWARD_RADAR = 0,
+  SENSOR_REF_MAIN_FORWARD_CAM = 1,
+
+  SENSOR_REF_MAX_NUM = 2
+};
+
+
+/**
+ * @struct
+ * @brief 关联跟踪状态
+ */
+enum {
+  ASS_LIST_TRACKED = 0,
+  ASS_LIST_MAIN_FORWARD_RADAR = 1,
+  ASS_LIST_MAIN_FORWARD_CAM = 2,
+  ASS_LIST_MAIN_FORWARD_LIDAR = 3,
+  ASS_LIST_MAX_NUM = 4
+};
+
+} // sensors fusion
+} // perception
+} // phoenix
+
+#endif

@@ -1,0 +1,59 @@
+# Vim
+*.swp
+*.swo
+
+# Visual Studio Code
+.vscode/settings.json
+sensing/.vscode/settings.json
+sensing_fusion/.vscode/settings.json
+control/.vscode/settings.json
+planning/.vscode/settings.json
+
+*.code-workspace
+
+# colcon
+CMakeLists.txt
+build/
+install/
+devel/
+log/
+
+# Python
+*.pyc
+
+# Jetbrains
+.idea/
+
+# rviz Screen Capture
+capture/
+
+# CodeChecker
+.codechecker/
+
+# Generated files
+*.result
+py_proto
+
+# Eclipse IDE files
+.project
+.cproject
+.settings
+.classpath
+
+# IntelliJ files
+.idea
+
+# Atom IDE files
+*.gch
+
+# Logs
+nohup.out
+*.bak
+*.stderr
+*.stdout
+
+# Data
+
+
+# WORKSPACE
+

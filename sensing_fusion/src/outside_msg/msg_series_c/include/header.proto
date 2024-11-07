@@ -1,0 +1,17 @@
+syntax = "proto2";
+
+package phoenix.msg.common;
+
+message Header {
+  /// 此报文是否有效
+  optional bool valid = 1 [default = false];
+  /// 消息的顺序号，用于检索及同步消息报文
+  optional uint32 sequence = 2 [default = 0];
+  /// 时间戳，用于时间同步
+  optional int64 timestamp = 3 [default = 0];
+  /// 发送模块的ID
+  optional uint32 src_module_id = 4 [default = 0];
+  /// 目标模块的ID
+  optional uint32 dst_module_id = 5 [default = 0];
+}
+

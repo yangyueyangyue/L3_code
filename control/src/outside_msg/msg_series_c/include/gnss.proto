@@ -1,0 +1,43 @@
+syntax = "proto2";
+
+package phoenix.msg.localization;
+
+import "header.proto";
+
+message Gnss {
+  enum Status {
+    STATUS_INVALID = 0;     // Invalid
+    STATUS_BAD = 1;         // Do NOT use. Bad solution due to insufficient observations
+    STATUS_CONVERGING = 2;  // Use with caution. The pose may be unavailable or incorrect.
+    STATUS_GOOD = 3;        // Safe to use. The INS has fully converged.
+  }
+
+  optional common.Header header = 1;                               // 报文头
+  optional double latitude = 2 [default = 0];                      // 纬度（-180～180）
+  optional double longitude = 3 [default = 0];                     // 经度（-180～180）
+  optional double altitude = 4 [default = 0];                      // 高度，单位（米）
+  optional float heading_gnss = 5 [default = 0];                   // 偏航角（0～359.99度）
+  optional double x_utm = 6 [default = 0];                         // utm 坐标X，单位（米）
+  optional double y_utm = 7 [default = 0];                         // utm 坐标Y，单位（米）
+  optional double z_utm = 8 [default = 0];                         // utm 坐标Z，单位（米）
+  optional float heading_utm = 9 [default = 0];                    // utm 偏航角（-PI～PI弧度）, utm_x轴为0度，逆时针为正方向(右手迪卡尔坐标系)
+  optional double x_odom = 10 [default = 0];                       // odom 坐标X，单位（米）
+  optional double y_odom = 11 [default = 0];                       // odom 坐标Y，单位（米）
+  optional double z_odom = 12 [default = 0];                       // odom 坐标Z，单位（米）
+  optional float heading_odom = 13 [default = 0];                  // odom 偏航角（-PI～PI弧度）, odom_x轴为0度，逆时针为正方向(右手迪卡尔坐标系)
+  optional float pitch = 14 [default = 0];                         // 俯仰角（-PI/2～PI/2弧度）					
+  optional float roll = 15 [default = 0];                          // 横滚角（-PI～PI弧度）				
+  optional float v_e = 16 [default = 0];                           // 东向速度，单位（米/秒）
+  optional float v_n = 17 [default = 0];                           // 北向速度，单位（米/秒）
+  optional float v_u = 18 [default = 0];                           // 天向速度，单位（米/秒）
+  optional float v_x_utm = 19 [default = 0];                       // utm x轴方向速度，单位（米/秒）
+  optional float v_y_utm = 20 [default = 0];                       // utm y轴方向速度，单位（米/秒）
+  optional float v_z_utm = 21 [default = 0];                       // utm z轴方向速度，单位（米/秒）
+  optional float v_x_odom = 22 [default = 0];                      // odom x轴方向速度，单位（米/秒）
+  optional float v_y_odom = 23 [default = 0];                      // odom y轴方向速度，单位（米/秒）
+  optional float v_z_odom = 24 [default = 0];                      // odom z轴方向速度，单位（米/秒）
+  optional Status gnss_status = 25 [default = STATUS_INVALID];     // gnss 定位状态
+  optional Status utm_status = 26 [default = STATUS_INVALID];      // utm 定位状态
+  optional Status odom_status = 27 [default = STATUS_INVALID];     // odom 定位状态
+}
+

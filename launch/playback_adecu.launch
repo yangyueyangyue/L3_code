@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- start sensing -->
+  <node pkg="sensing" name="sensing" type="sensing" output="screen"/>
+
+  <!-- start sensing_fusion -->
+  <node pkg="sensing_fusion" name="sensing_fusion" type="sensing_fusion" output="screen"/>
+
+  <!-- start control -->
+  <node pkg="control" name="control" type="control" output="screen"/>
+
+  <!-- start rqt image view -->
+  <node pkg="rqt_image_view" name="rqt_image_view" type="rqt_image_view" output="screen"/>
+
+</launch>

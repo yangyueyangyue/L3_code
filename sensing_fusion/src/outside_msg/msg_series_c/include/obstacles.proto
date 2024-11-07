@@ -1,0 +1,131 @@
+syntax = "proto2";
+
+package phoenix.msg.perception;
+
+import "header.proto";
+
+message Obstacle {
+  // 障碍物类型
+  enum ObjType {
+    // 未知
+    OBJ_TYPE_UNKNOWN = 0;
+    // 乘用车           
+    OBJ_TYPE_PASSENGER_VEHICLE = 1;
+    // 商用车     
+    OBJ_TYPE_COMMERCIAL_VEHICLE = 2;
+    // 特殊车    
+    OBJ_TYPE_SPECIAL_VEHICLE = 3;
+    // 未知类型机动车      
+    OBJ_TYPE_OTHER_VEHICLE = 4;
+    // 行人         
+    OBJ_TYPE_PEDESTRIAN = 5;
+    // 非机动车(骑行者) 
+    OBJ_TYPE_BICYCLE = 6;
+    // 动物               
+    OBJ_TYPE_ANIMAL = 7;
+    // 遗撒物              
+    OBJ_TYPE_DISCARD = 8;
+    /// 路沿
+    OBJ_TYPE_CURB = 9;                  
+  }
+
+  // 障碍物感知类别
+  enum PerceptionType {
+    // 感知类别未知
+    OBJ_PRCP_TYPE_UNKNOWN = 0;
+    // 单个传感器新识别出的目标(Radar)
+    OBJ_PRCP_TYPE_RADAR = 1;
+    // 单个传感器新识别出的目标(Camera)
+    OBJ_PRCP_TYPE_CAMERA = 2;
+    // 融合的目标（融合上的目标）
+    OBJ_PRCP_TYPE_FUSED = 3;
+    // 单个传感器新识别出的目标(Lidar)
+    OBJ_PRCP_TYPE_LIDAR = 4;
+  }
+
+  // 有向矩形包围盒
+  message OBBox {
+    // 中心坐标x
+    optional float x = 1 [default = 0];
+    // 中心坐标y
+    optional float y = 2 [default = 0];
+    // 航向角
+    optional float heading = 3 [default = 0];
+    // 半宽
+    optional float half_width = 4 [default = 0];
+    // 半长
+    optional float half_length = 5 [default = 0];
+  }
+
+  // 有向矩形包围盒
+  message PredPathPoint {
+    // 形点坐标x
+    optional float x = 1 [default = 0];
+    // 形点坐标y
+    optional float y = 2 [default = 0];
+    // 障碍物在此点的航向
+    optional float heading = 3 [default = 0];
+    // 障碍物在此点沿着轨迹的长度
+    optional float s = 4 [default = 0];
+  }
+
+  // 对动态障碍物预测的轨迹
+  message PredPath {
+    repeated PredPathPoint points = 1;
+  }
+
+  // 对动态障碍物预测的轨迹
+  message Point2D {
+    // 形点坐标x
+    optional float x = 1 [default = 0];
+    // 形点坐标y
+    optional float y = 2 [default = 0];
+  }
+
+  // 障碍物ID
+  optional int32 id = 1 [default = 0];
+  // 障碍物位置x坐标
+  optional float x = 2 [default = 0];
+  // 障碍物位置y坐标
+  optional float y = 3 [default = 0];
+  // 障碍物包围盒
+  optional OBBox obb = 4;
+  /// 障碍物高度
+  optional float height = 5 [default = 0];
+  // 离地面高度
+  optional float height_to_ground = 6 [default = 0];
+  // 障碍物类型
+  optional ObjType type = 7 [default = OBJ_TYPE_UNKNOWN];
+  // 是否是动态障碍物
+  optional bool dynamic = 8 [default = false];
+  // 障碍物存在的置信度
+  optional int32 confidence = 9 [default = 0];
+  /// 感知类别
+  optional PerceptionType perception_type = 10 [default = OBJ_PRCP_TYPE_UNKNOWN];
+  // 障碍物绝对速度，沿着车身纵轴的速度，单位：米/秒
+  optional float v_x = 11 [default = 0];
+  // 障碍物绝对速度，沿着车身横轴的速度，单位：米/秒
+  optional float v_y = 12 [default = 0];
+  // 障碍物绝对速度，单位：米/秒
+  optional float v = 13 [default = 0];
+  // 障碍物绝对加速度，沿着车身纵轴的加速度，单位：米^2/秒
+  optional float a_x = 14 [default = 0];
+  // 障碍物绝对加速度，沿着车身横轴的加速度，单位：米^2/秒
+  optional float a_y = 15 [default = 0];
+  // 障碍物绝对加速度，单位：米^2/秒
+  optional float a = 16 [default = 0];
+  // 对动态障碍物预测的轨迹
+  repeated PredPath pred_path = 17;
+  // 障碍物跟踪轨迹轨迹
+  repeated Point2D tracked_path = 18;
+}
+
+message ObstacleList {
+  // 报文头
+  optional common.Header header = 1;
+
+  // 障碍物列表
+  repeated Obstacle obstacles = 2;
+}
+
+

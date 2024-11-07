@@ -1,0 +1,105 @@
+syntax = "proto3";
+package phoenix.ad_data_upload;
+option optimize_for = LITE_RUNTIME;
+message LaneItem_message
+{
+				uint32	camera_Lane_ID = 1;
+				uint32	camera_Lane_Type = 2;
+				uint32	Camera_Lane_ProbOfExist = 3;
+				float	Camera_Lane_Curvature0 = 4;
+				float	Camera_Lane_Curvature1 = 5;
+				float	Camera_Lane_Curvature2 = 6;
+				float	Camera_Lane_Curvature3 = 7;
+				uint64	reverse1 = 8;
+				uint64	reverse2 = 9;
+};
+message LaneCurve_message
+{
+				uint32	uType = 1;
+				LaneItem_message	stCurLeftLane = 2;
+				LaneItem_message	stCurRightLane = 3;
+				LaneItem_message	stLeftLeftLane = 4;
+				LaneItem_message	stRightRightLane = 5;
+};
+message Coordinate_message
+{
+				double	m_x = 1;
+				double	m_y = 2;
+				double	m_z = 3;
+};
+message PositionMessage_message
+{
+				uint64	m_timestamp = 1;
+				uint64	m_positionAge = 2;
+				float	m_datum = 3;
+				float	m_heading = 4;
+				float	m_speed = 5;
+				float	m_proability = 6;
+				Coordinate_message	m_point = 7;
+};
+message Lane_Position_Display_Data_message
+{
+				LaneCurve_message	lane_curve = 1;
+				PositionMessage_message	position_message = 2;
+};
+message OffsetFloatEntry_message
+{
+				uint32	m_offset = 1;
+				float	m_value = 2;
+};
+message LineControlPoint_message
+{
+				uint32	m_dist = 1;
+				uint32	m_value = 2;
+};
+message LineControlPoints_message
+{
+				uint32	m_type = 1;
+				uint64	m_lineId = 2;
+				uint32	m_control_points_size_t = 3;
+				repeated LineControlPoint_message	m_control_points = 4;
+};
+message MapLaneInfo_message
+{
+				uint64	m_timestamp = 1;
+				float	m_datum_Timestamp = 2;
+				uint64	base_lane_id = 3;
+				uint64	left_lane_id = 4;
+				uint64	right_lane_id = 5;
+				uint32	next_lane_id_size_t = 6;
+				uint32	pre_lane_id_size_t = 7;
+				repeated uint64	next_lane_id = 8;
+				repeated uint64	pre_lane_id = 9;
+				uint32	lane_transition = 10;
+				uint32	lane_connecttype = 11;
+				uint32	pathId = 12;
+				uint32	lane_offset_start = 13;
+				uint32	lane_offset_end = 14;
+				uint32	lane_index = 15;
+				uint32	lane_number = 16;
+				uint32	center_points_size_t = 17;
+				uint32	left_points_size_t = 18;
+				uint32	right_points_size_t = 19;
+				repeated Coordinate_message	center_points = 20;
+				repeated Coordinate_message	left_points = 21;
+				repeated Coordinate_message	right_points = 22;
+				uint32	speed_limit_max = 23;
+				uint32	speed_limit_min = 24;
+				float	length = 25;
+				uint32	curvarture_size_t = 26;
+				uint32	Latslope_size_t = 27;
+				uint32	Lngslope_size_t = 28;
+				repeated OffsetFloatEntry_message	curvarture = 29;
+				repeated OffsetFloatEntry_message	Latslope = 30;
+				repeated OffsetFloatEntry_message	Lngslope = 31;
+};
+message MPUMapVecLaneInfo_message
+{
+				uint64	Time_stamp = 1;
+				uint32	data_size_t = 2;
+				repeated MapLaneInfo_message	data = 3;
+};
+message Map_Display_Data_message
+{
+				MPUMapVecLaneInfo_message	map_lane_info = 1;
+};

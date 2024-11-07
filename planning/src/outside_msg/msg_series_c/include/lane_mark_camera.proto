@@ -1,0 +1,59 @@
+syntax = "proto2";
+
+package phoenix.msg.perception;
+
+import "header.proto";
+
+
+// 车道线信息（摄像头识别的）
+message LaneMarkCamera {
+  // 车道线的类型定义
+  enum LaneMarkType {
+    LANE_MARK_TYPE_INVALID = 0;
+    LANE_MARK_TYPE_UNKNOWN = 1;
+    LANE_MARK_TYPE_DASHED = 2;
+    LANE_MARK_TYPE_SOLID = 3;
+    LANE_MARK_TYPE_DOUBLE_LANE_MARK = 4;
+    LANE_MARK_TYPE_BOTTS_DOTS = 5;
+    LANE_MARK_TYPE_ROAD_EDGE = 6;
+  };
+
+  // 车道编号，左边车道线为正值，右边车道线为负数; 
+  // (数值的绝对值按照距离当前车道的远近依次增加，第一条左边的车道线为1，第一条右边的车道线为-1)
+  optional int32 id = 1 [default = 0];
+  // 车道线类型
+  optional LaneMarkType lane_mark_type = 2 [default = LANE_MARK_TYPE_INVALID];
+  // 车道线识别的质量(0,1 – low quality.The lane measurements are not valid in low quality. 
+  // The system will not give an LDW in that situation. 2,3 – high quality)
+  optional int32 quality = 3 [default = 0];
+  // 车道线的纵向有效范围字段中的值是否有效
+  optional bool view_range_valid = 4 [default = false];
+  // 车道线的宽度
+  optional float mark_width = 5 [default = 0];
+  // 车道线的纵向有效范围的起始位置
+  optional float view_range_start = 6 [default = 0];
+  // 车道线的纵向有效范围的结束位置
+  optional float view_range_end = 7 [default = 0];
+  // 曲线参数c0
+  optional double c0 = 8 [default = 0];
+  // 曲线参数c1
+  optional double c1 = 9 [default = 0];
+  // 曲线参数c2
+  optional double c2 = 10 [default = 0];
+  // 曲线参数c3
+  optional double c3 = 11 [default = 0];
+  // 备注：
+  // 车道线使用三阶多项式曲线定义 y = c0 + c1 * x + c2 * x^2 + c3 * x^3
+  // 使用右手迪卡尔坐标系，x为车身纵轴方向，向前为正方向，y为车身横轴方向，向左为正方向;
+  // 角度以x轴正方向为0度，逆时针方向为正。
+}
+
+// 车道线信息列表（摄像头识别的）
+message LaneMarkCameraList {
+  // 报文头
+  optional common.Header header = 1;
+  // 车道线信息列表
+  repeated LaneMarkCamera lane_mark_list = 2;
+}
+
+

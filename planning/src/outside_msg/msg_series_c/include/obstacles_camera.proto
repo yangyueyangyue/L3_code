@@ -1,0 +1,118 @@
+syntax = "proto2";
+
+package phoenix.msg.perception;
+
+import "header.proto";
+
+message ObstacleCamera {
+  // 障碍物类型
+  enum ObjType {
+    // 未知
+    OBJ_TYPE_UNKNOWN = 0;
+    // 乘用车           
+    OBJ_TYPE_PASSENGER_VEHICLE = 1;
+    // 商用车     
+    OBJ_TYPE_COMMERCIAL_VEHICLE = 2;
+    // 特殊车    
+    OBJ_TYPE_SPECIAL_VEHICLE = 3;
+    // 未知类型机动车      
+    OBJ_TYPE_OTHER_VEHICLE = 4;
+    // 行人         
+    OBJ_TYPE_PEDESTRIAN = 5;
+    // 非机动车(骑行者) 
+    OBJ_TYPE_BICYCLE = 6;
+    // 动物               
+    OBJ_TYPE_ANIMAL = 7;
+    // 遗撒物              
+    OBJ_TYPE_DISCARD = 8; 
+    // 路沿
+    OBJ_TYPE_CURB = 9;
+  };
+  // 障碍物的状态
+  enum ObjStatus {
+    OBJ_STATUS_UNKNOWN = 0;
+    OBJ_STATUS_STANDING = 1;
+    OBJ_STATUS_STOPPED = 2;
+    OBJ_STATUS_MOVING = 3;
+    OBJ_STATUS_ONCOMING = 4;
+    OBJ_STATUS_PARKED = 5;
+  };
+  // 切入/切出的类型
+  enum CutInType {
+    CUT_IN_TYPE_UNKNOWN = 0;
+    CUT_IN_TYPE_IN_HOST_LANE = 1;
+    CUT_IN_TYPE_OUT_HOST_LANE = 2;
+    CUT_IN_TYPE_CUT_IN = 3;
+    CUT_IN_TYPE_CUT_OUT = 4;
+  };
+  // 转向灯的状态
+  enum BlinkerType {
+    BLINKER_UNKNOWN = 0;
+    BLINKER_OFF = 1;
+    BLINKER_LEFT = 2;
+    BLINKER_RIGHT = 3;
+    BLINKER_BOTH = 4;
+  };
+
+  // 障碍物ID
+  optional int32 id = 1 [default = 0];
+  // 障碍物类型
+  optional ObjType type = 2 [default = OBJ_TYPE_UNKNOWN];
+  // 障碍物的状态
+  optional ObjStatus status = 3 [default = OBJ_STATUS_UNKNOWN];
+  // 切入/切出的类型
+  optional CutInType cut_in = 4 [default = CUT_IN_TYPE_UNKNOWN];
+  // 转向灯的状态
+  optional BlinkerType blinker = 5 [default = BLINKER_UNKNOWN];
+  // 制动灯状态
+  optional bool brake_lights = 6 [default = false];
+  // The age of the obstacle (in frames). This value starts at 1 when the
+  // obstacle is first detected, and increments in 1 each frame.
+  optional int32 age = 7 [default = 0];
+  // 指示障碍物在哪个车道
+  optional int32 lane = 8 [default = 0];
+  // 障碍物长度 (m)
+  optional float length = 9 [default = 0];
+  // 障碍宽度 (m)
+  optional float width = 10 [default = 0];
+  // 障碍物高度（m）
+  optional float height = 11 [default = 0];
+  // 障碍物位置x坐标 (m)
+  optional float x = 12 [default = 0];
+  // 障碍物位置y坐标 (m)
+  optional float y = 13 [default = 0];
+  // 障碍物航向 (rad)
+  optional float heading = 14 [default = 0];
+  // 障碍物的x向速度 (m/sec)
+  optional float v_x = 15 [default = 0];
+  // 障碍物的y向速度 (m/sec)
+  optional float v_y = 16 [default = 0];
+  // 障碍物的加速度 (m/sec^2)
+  optional float accel_x = 17 [default = 0];
+  // 障碍物的加速度 (m/sec^2)
+  optional float accel_y = 18 [default = 0];
+  // 障碍物的角速度 (rad/sec)
+  optional float yaw_rate = 19 [default = 0];
+  // 尺度的变化 (pix/sec)
+  optional float scale_change = 20 [default = 0];
+}
+
+message ObstacleCameraList {
+  // Camera类型定义
+  enum CamType {
+    CAM_TYPE_UNKNOWN = 0;
+    CAM_TYPE_MOBILEYE_Q2 = 1;
+    CAM_TYPE_MAXIEYE_D500 = 2;
+  };
+
+  // 报文头
+  optional common.Header header = 1;
+  // Camera类型
+  optional CamType cam_type = 2 [default = CAM_TYPE_UNKNOWN];
+  // 障碍物的数量
+  optional int32 obstacles_num = 3 [default = 0];
+  // 障碍物列表
+  repeated ObstacleCamera obstacles = 4;
+}
+
+
